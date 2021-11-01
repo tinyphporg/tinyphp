@@ -11,6 +11,7 @@
     	"name" : "saasjit",
     	"email" : "tinycn@qq.com"
     },
+    "version" : "dev-master",
     "autoload":{
     "psr-4" : { "App\\":"application/"}
     }
