@@ -1,0 +1,14 @@
+.buildpath
+.project
+*.log
+.git
+*/.pid
+*.txt
+.settings
+/vendor/
+.DS_Store
+*.phar
+application/runtime/view/*
+*/public/setting
+*/public/profile
+composer.lock

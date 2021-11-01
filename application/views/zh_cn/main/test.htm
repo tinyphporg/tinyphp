@@ -1,0 +1,65 @@
+<html>
+<head>
+<title>Tinyphp frameworks for PHP</title>
+</head>
+<body>
+    <div>
+
+{eval $ssss="aaa";echo $ssss;}      
+{APPLICATION_PATH}
+{$ssss->a['aa']['aaa']->aaa}
+{url c=main,a=index,b=aa|r}
+        <ul>
+        <li><h3>Hello World!</h3></li>
+          <li>Name: Tinyphp frameworks for PHP</li>
+            <li>Controller: <strong>{$controllerName}</strong></li>
+            <li>Action: <strong>{$actionName}</strong></li>
+            <li>Name: <strong>{$name}</strong>, default:<strong>{$defName}</strong>, isRequired:<strong>{$isName}</strong></li>
+    
+        
+        </ul>
+        
+        <ul>
+        <li><b>Using model</b></li>
+        {loop $users['a']->a['s'] $key $user}  
+        <li>
+        {loop $user $k $v}
+        <span>$k : $v</span>
+        {/loop}
+        </li>
+        {/loop}
+        </ul>
+        
+              <ul>
+        <li><b>Using model</b></li>
+        {foreach $users['a']->a['s'] $key $user}  
+        <li>
+        {loop $user $k $v}
+        <span>$k : $v</span>
+        {/loop}
+        </li>
+        {/loop}
+        </ul>
+              <ul>
+        <li><b>Using model</b></li>
+        {for $i=0;$i< 1;$i++}  
+        <li>
+        {loop $user $k $v}
+        <span>$k : $v</span>
+        {/loop}
+        </li>
+        {/loop}
+        </ul>       
+            {if $a}
+            $k
+            {elseif $a == '2'}
+            $v $a['a']->aa['aaa']
+            {else}
+            aaaa
+            {/if}  
+    </div>
+    <script >
+    var a = {"a":"aaa"};
+    </script>
+</body>
+</html>

@@ -1,0 +1,32 @@
+<html>
+<head>
+<title>Tinyphp frameworks for PHP</title>
+</head>
+<body>
+    <div>
+        
+
+        <ul>
+        <li><h3>Hello World!</h3></li>
+          <li>Name: Tinyphp frameworks for PHP</li>
+            <li>Controller: <strong>{$controllerName}</strong></li>
+            <li>Action: <strong>{$actionName}</strong></li>
+            <li>Name: <strong>{$name}</strong>, default:<strong>{$defName}</strong>, isRequired:<strong>{$isName}</strong></li>
+    
+        
+        </ul>
+        
+        <ul>
+        <li><b>Using model</b></li>
+        {loop $users $key $user}
+        <li>
+        {loop $user $k $v}
+        <span>$k : $v</span>
+        {/loop}
+        </li>
+        {/loop}
+        </ul>
+              
+    </div>
+</body>
+</html>

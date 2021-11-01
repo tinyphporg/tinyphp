@@ -1,0 +1,19 @@
+{
+    "name": "saasjit/tinyphp",
+    "description": "a framework for php",
+    "type" : "project",
+    "require" :{
+    	"php" : ">= 7.0.0",
+    	"saasjit/tinyphp-framework" : ">= 1"
+    },
+    "license": "Apache-2.0",
+    "minimum-stability": "stable",
+    "version": "1.0.0",    
+    "author" : {
+    	"name" : "saasjit",
+    	"email" : "tinycn@qq.com"
+    },
+    "autoload":{
+    "psr-4" : { "App\\":"application/"}
+    }
+}
