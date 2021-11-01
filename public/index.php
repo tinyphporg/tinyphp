@@ -13,10 +13,6 @@
 /* 该常量必须设置*/
 define('TINY_ROOT_PATH', dirname(__DIR__) . DIRECTORY_SEPARATOR);
 
-/* 加载Tiny标准库*/
-define('TINY_LIBRARY_FILE', TINY_ROOT_PATH . '/src/Tiny.php');
-include_once TINY_LIBRARY_FILE;
-
 /* 自动加载composer库 */
 define('TINY_COMPOSER_FILE', TINY_ROOT_PATH . '/vendor/autoload.php');
 if (is_file(TINY_COMPOSER_FILE)) 

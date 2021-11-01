@@ -4,7 +4,7 @@
     "type" : "project",
     "require" :{
     	"php" : ">= 7.0.0",
-    	"saasjit/tinyphp-framework" : ">= 1"
+    	"saasjit/tinyphp-framework" : "master-dev"
     },
     "license": "Apache-2.0",
     "minimum-stability": "stable",
