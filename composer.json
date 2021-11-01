@@ -3,11 +3,10 @@
     "description": "a framework for php",
     "type" : "project",
     "require" :{
-    	"php" : ">= 7.0.0"
+    	"php" : ">= 7.0.0",
+    	"saasjit/tinyphp-framework": "dev-master"
     },
     "license": "Apache-2.0",
-    "minimum-stability": "stable",
-    "version": "1.0.0",    
     "author" : {
     	"name" : "saasjit",
     	"email" : "tinycn@qq.com"
