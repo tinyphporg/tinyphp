@@ -7,6 +7,7 @@
 		"saasjit/tinyphp-framework" : "dev-master"
 	},
 	"license" : "Apache-2.0",
+	"minimum-stability" : "dev",
 	"author" : {
 		"name" : "saasjit",
 		"email" : "tinycn@qq.com"
@@ -15,6 +16,5 @@
 		"psr-4" : {
 			"App\\" : "application/"
 		}
-	},
-	"minimum-stability" : "stable"
+	}
 }
