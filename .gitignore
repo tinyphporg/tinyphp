@@ -9,6 +9,7 @@
 .DS_Store
 *.phar
 application/runtime/view/*
-*/public/setting
-*/public/profile
+public/setting
+public/profile
+public/tinyphp-ui
 composer.lock

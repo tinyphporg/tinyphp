@@ -199,6 +199,7 @@ $profile['response']['formatJsonConfigId'] = 'status';
  * 类型 htm Template模板引擎
  */
 $profile['view']['src']     = 'views/';
+$profile['view']['template_dirname'] = 'default'; 
 $profile['view']['lang']['enabled'] = TRUE;
 
 $profile['view']['compile'] = 'runtime/view/compile/';
@@ -211,6 +212,7 @@ $profile['view']['cache']['lifetime']   = 120;
 
 // 设置视图引擎
 $profile['view']['engines'] = [
+   /*
     ['engine' => '\Tiny\MVC\View\Engine\Template', 'ext' => ['html', 'htm'], 'config' => [
         'plugins' => [
             ['plugin' => '\Tiny\MVC\View\Engine\Template\Url' , 'config' => []]
@@ -218,13 +220,25 @@ $profile['view']['engines'] = [
     ]],
     ['engine' => '\Tiny\MVC\View\Engine\Smarty', 'ext' => ['tpl'], 'config' => []],
     ['engine' => '\Tiny\MVC\View\Engine\PHP', 'ext' => ['php'], 'config' => []],
+    */
 ];
 
 // 设置视图助手
 $profile['view']['helpers'] = [
-    ['helper' => '\Tiny\MVC\View\Helper\MessageBox', 'config' => []]
+   // ['helper' => '\Tiny\MVC\View\Helper\MessageBox', 'config' => []]
 ];
 
+$profile['view']['ui']['enabled'] = TRUE;
+$profile['view']['ui']['public_path'] = '/tinyphp-ui/';
+$profile['view']['ui']['template_plugin'] = '\Tiny\MVC\View\UI\UIViewTemplatePlugin';
+$profile['view']['ui']['helper'] = '\Tiny\MVC\View\UI\UIViewHelper';
+$profile['view']['ui']['template_dirname'] = 'tinyphp-ui';
+$profile['view']['ui']['inject'] = TRUE;
+
+$profile['view']['ui']['installer']['param_name'] = 'ui-install';
+$profile['view']['ui']['installer']['template_path'] = 'tinyphp-ui/';     //application/views目录下的相对路径
+$profile['view']['ui']['installer']['frontend_path'] = 'tinyphp-ui/';     //public目录下的相对路径
+$profile['view']['ui']['installer']['plugin'] = '\Tiny\MVC\View\UI\UIInstaller';
 
 /**
  * 路由规则设置
