@@ -229,16 +229,13 @@ $profile['view']['helpers'] = [
 ];
 
 $profile['view']['ui']['enabled'] = TRUE;
-$profile['view']['ui']['public_path'] = '/tinyphp-ui/';
-$profile['view']['ui']['template_plugin'] = '\Tiny\MVC\View\UI\UIViewTemplatePlugin';
-$profile['view']['ui']['helper'] = '\Tiny\MVC\View\UI\UIViewHelper';
-$profile['view']['ui']['template_dirname'] = 'tinyphp-ui';
-$profile['view']['ui']['inject'] = TRUE;
+$profile['view']['ui']['public_path'] = '/tinyphp-ui/'; //公共访问地址
+$profile['view']['ui']['inject'] = TRUE;  //自动注入
 
 $profile['view']['ui']['installer']['param_name'] = 'ui-install';
-$profile['view']['ui']['installer']['template_path'] = 'tinyphp-ui/';     //application/views目录下的相对路径
-$profile['view']['ui']['installer']['frontend_path'] = 'tinyphp-ui/';     //public目录下的相对路径
+$profile['view']['ui']['installer']['frontend_path'] = 'tinyphp-ui/';     //public目录下的相对安装路径
 $profile['view']['ui']['installer']['plugin'] = '\Tiny\MVC\View\UI\UIInstaller';
+$profile['view']['ui']['installer']['config_path'] = 'config/tinyphp-ui.php';    //config的附加view.ui节点配置
 
 /**
  * 路由规则设置

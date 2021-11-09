@@ -1,14 +1,16 @@
 <html>
 <head>
 <title>Tinyphp frameworks for PHP</title>
-{ui.lib}
+{ui.lib} 
+</head>
+<body>
+
+{template helper/messagebox.htm}
 {template main/index.tpl}
 {template main/test.htm}
 {eval $test='test'}
 {template main/$test.htm}
 {date now|y-m-d}
-</head>
-<body>
     <div>
         
 
