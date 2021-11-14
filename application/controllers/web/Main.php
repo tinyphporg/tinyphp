@@ -45,7 +45,7 @@ class Main extends Controller
         ]);
        //return $this->view->messagebox->show('aaaaaas');
        // $this->view->messagebox->show('aaa');
-       // throw new DbException('aaaa');
+        throw new DbException('aaaa');
         $this->parse('main/index.htm');
     }
     
