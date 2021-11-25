@@ -43,9 +43,9 @@ class Main extends Controller
             'users' => $userInfo,
             'users1' => $userInfo1
         ]);
-       //return $this->view->messagebox->show('aaaaaas');
+       return $this->view->messagebox->show('aaaaaas');
        // $this->view->messagebox->show('aaa');
-        throw new DbException('aaaa');
+       // throw new DbException('aaaa');
         $this->parse('main/index.htm');
     }
     

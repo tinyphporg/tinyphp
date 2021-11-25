@@ -4,7 +4,8 @@
     "type": "project",
     "require": {
         "php": ">= 7.0.0",
-        "saasjit/tinyphp-framework": "dev-master"
+        "saasjit/tinyphp-framework": "dev-master",
+        "saasjit/tinyphp-ui": "dev-master"
     },
     "license": "Apache-2.0",
     "version": "1.0.0",

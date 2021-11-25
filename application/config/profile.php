@@ -28,6 +28,20 @@ $profile['exception']['log'] = TRUE;     /*是否以日志方式输出异常信�
 $profile['exception']['logid'] = 'tinyphp_exception';  /*日志ID*/
 
 /**
+ * 应用基本设置
+ */
+$profile['app']['namespace'] = 'App';        /*命名空间*/
+$profile['app']['resources'] = 'resource/';  /*资源文件夹*/
+$profile['app']['runtime'] = 'runtime/';     /*运行时文件夹*/
+$profile['app']['tmp'] = 'runtime/tmp/';     /*临时文件夹*/
+
+/* 
+ * 插件配置
+ */
+$profile['plugin']['enabled'] = TRUE;
+$profile['plugins'] = [];
+
+/**
  * 自动加载引导类
  */
 $profile['bootstrap']['enabled'] = TRUE;
@@ -38,7 +52,7 @@ $profile['bootstrap']['class'] = '\App\Common\Bootstrap';
  */
 $profile['build']['enabled'] = TRUE;    /*不开启时 忽略build打包行为*/
 $profile['build']['param_name'] = 'build'; /*--build参数 开启打包工作*/
-$profile['build']['plugin'] = '\Tiny\MVC\Plugin\Builder';
+$profile['build']['plugin'] = '\Tiny\MVC\Plugin\Builder';  //添加插件
 $profile['build']['path'] = 'build/builder'; /*打包配置文件夹*/
 $profile['build']['config_path'] = 'build/config';  /*打包器的设置文件夹，用来自定义application.config数据*/
 $profile['build']['profile_path'] = 'build/profile';  /*打包器的属性文件夹,用来自定义application.properties数据*/
@@ -47,15 +61,16 @@ $profile['build']['profile_path'] = 'build/profile';  /*打包器的属性文件
  * 调试器设置
  */
 $profile['debug']['param_name'] = 'debug';  //开启调试模式时: 命令行环境,--debug可开启调试模式; web环境下，检测到控制器为debug时，默认通过debug插件处理
-$profile['debug']['class'] = '\Tiny\MVC\Plugin\Debug';
-//$profile['debug']['console'] = TRUE;  // 命令行输出Debug信息
+$profile['debug']['plugin'] = '\Tiny\MVC\Plugin\Debug';  //添加debug插件
+$profile['debug']['cache']['enabled'] = TRUE;
+$profile['debug']['console'] = FALSE;  // 命令行输出Debug信息
 
 /**
  * 守护进程的基本设置
  */
 $profile['daemon']['enabled'] = TRUE;
 $profile['daemon']['id'] = 'tinyphp-daemon';          /*默认的daemonid*/
-$profile['daemon']['plugin'] = '\Tiny\MVC\Plugin\Daemon';
+$profile['daemon']['plugin'] = '\Tiny\MVC\Plugin\Daemon';  //添加daemon插件
 $profile['daemon']['piddir'] = 'runtime/pid/'; /*守护进程pid目录*/
 $profile['daemon']['logdir'] = 'runtime/log/'; /*守护进程的日志目录*/
 $profile['daemon']['tick'] = 2;                /*检测子进程退出后的tick数 避免异常时大量创建操作系统进程引发崩溃*/
@@ -231,7 +246,15 @@ $profile['view']['helpers'] = [
 
 $profile['view']['ui']['enabled'] = TRUE;
 $profile['view']['ui']['public_path'] = '/tinyphp-ui/'; //公共访问地址
+$profile['view']['ui']['dev_enabled'] = TRUE;
+$profile['view']['ui']['dev_public_path'] = "http://front.dev.tinycn.com/js/tinyphp-ui.js";
 $profile['view']['ui']['inject'] = TRUE;  //自动注入
+
+$profile['view']['ui']['template_plugin'] = '\\Tiny\\MVC\\View\\UI\\UIViewTemplatePlugin';
+$profile['view']['ui']['helper'] = '\\Tiny\\MVC\\View\\UI\\UIViewHelper';
+$profile['view']['ui']['template_dirname'] = '../vendor/saasjit/tinyphp-ui/templates/';
+
+$profile['plugins']['ui'] = '\Tiny\MVC\View\UI\UITemplatePlugin'; //添加调试pages的插件
 
 $profile['view']['ui']['installer']['param_name'] = 'ui-install';
 $profile['view']['ui']['installer']['frontend_path'] = 'tinyphp-ui/';     //public目录下的相对安装路径
@@ -247,18 +270,8 @@ $profile['router']['rules'] = [
     ['router' => 'pathinfo', 'rule' => ['ext' => '.html'], 'domain' => '*.tinycn.com'],
     ];
 
-/**
- * 是否开启插件
- */
-$profile['plugin']['enabled'] = FALSE;
 
-/**
- * 应用基本设置
- */
-$profile['app']['namespace'] = 'App';        /*命名空间*/
-$profile['app']['resources'] = 'resource/';  /*资源文件夹*/
-$profile['app']['runtime'] = 'runtime/';     /*运行时文件夹*/
-$profile['app']['tmp'] = 'runtime/tmp/';     /*临时文件夹*/
+
 
 /**
  * application的源码设置
@@ -293,6 +306,7 @@ $profile['path'] = [
             'view.cache.dir',
             'view.compile',
             'view.config',
+            'view.ui.template_dirname',
             'src.library',
             'src.global',
 			'src.controller',
