@@ -16,6 +16,7 @@
 namespace App\Controller;
 
 use Tiny\MVC\Controller\Controller;
+use Tiny\Cache\Cache;
 
 /**
  * an example of main controller
@@ -176,6 +177,8 @@ class Main extends Controller
      */
     public function cacheAction()
     {
+       //Cache::getInstance();
+
         $example = $this->cache->get('example.name');
         if (!$example)
         {

@@ -35,6 +35,11 @@ $profile['app']['resources'] = 'resource/';  /*资源文件夹*/
 $profile['app']['runtime'] = 'runtime/';     /*运行时文件夹*/
 $profile['app']['tmp'] = 'runtime/tmp/';     /*临时文件夹*/
 
+//服务注入管理
+$profile['service'] = [
+    
+];
+
 /* 
  * 插件配置
  */

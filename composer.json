@@ -5,7 +5,10 @@
     "require": {
         "php": ">= 7.0.0",
         "saasjit/tinyphp-framework": "dev-master",
-        "saasjit/tinyphp-ui": "dev-master"
+        "saasjit/tinyphp-ui": "dev-master",
+        "psr/container": "^2.0",
+        "psr/cache": "^1.0",
+        "psr/simple-cache": "^1.0"
     },
     "license": "Apache-2.0",
     "version": "1.0.0",
