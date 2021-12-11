@@ -20,6 +20,8 @@ $profile['debug']['enabled'] = TRUE;      /*是否开启调试模式: bool FALSE
 $profile['timezone'] = 'PRC';  /*设置时区*/
 $profile['charset'] = 'utf-8'; /*设置编码*/
 
+$profile['container']['config_path'] = 'container/app.php';
+
 /**
  * 异常模块
  */
@@ -31,8 +33,8 @@ $profile['exception']['logid'] = 'tinyphp_exception';  /*日志ID*/
  * 应用基本设置
  */
 $profile['app']['namespace'] = 'App';        /*命名空间*/
-$profile['app']['resources'] = 'resource/';  /*资源文件夹*/
-$profile['app']['runtime'] = 'runtime/';     /*运行时文件夹*/
+$profile['app']['resources'] = '../resource/';  /*资源文件夹*/
+$profile['app']['runtime'] = '../runtime/';     /*运行时文件夹*/
 $profile['app']['tmp'] = 'runtime/tmp/';     /*临时文件夹*/
 
 //服务注入管理
@@ -101,7 +103,7 @@ $profile['daemon']['policys'] = [
  * application配置模块设置
  */
 $profile['config']['enabled'] = TRUE;   /* 是否开启默认配置模块 */
-$profile['config']['path'] = 'config/'; /* 配置文件相对路径 */
+$profile['config']['path'] = 'config/config'; /* 配置文件相对路径 */
 $profile['config']['paths'] = [];       /*可加载多个扩展的配置文件或文件夹路径，必须为绝对或者相对路径 数据可覆盖*/
 $profile['config']['cache']['enabled'] = TRUE; /*配置模块缓存设置 提高性能*/
 
@@ -187,29 +189,22 @@ $profile['cookie']['prefix'] = '';
 $profile['cookie']['encode'] = FALSE;
 
 /**
- * 控制器设置
+ * 
  */
+$profile['controller']['namespace']['default'] = 'Controller';
+$profile['controller']['namespace']['console'] = 'Controller\Console';
+$profile['controller']['namepsace']['rpc'] = 'Controller\RPC';
+
+$profile['controller']['src'] = 'controller/';
 $profile['controller']['default'] = 'main';
 $profile['controller']['param'] = 'c';
-$profile['controller']['namespace'] = 'Controller';
-$profile['controller']['console'] = 'Controller\Console';
-$profile['controller']['rpc'] = 'Controller\RPC';
 
-/**
- * 模型
- */
 $profile['model']['namespace'] = 'Model';
+$profile['model']['src'] = 'models/';
 
-/**
- * 动作设置
- */
 $profile['action']['default'] = 'index';
 $profile['action']['param'] = 'a';
 
-/**
- * response输出JSON时 默认指定的配置ID
- */
-$profile['response']['formatJsonConfigId'] = 'status';
 
 /**
  * 视图设置
@@ -251,16 +246,17 @@ $profile['view']['helpers'] = [
 
 $profile['view']['ui']['enabled'] = TRUE;
 $profile['view']['ui']['public_path'] = '/tinyphp-ui/'; //公共访问地址
-$profile['view']['ui']['dev_enabled'] = TRUE;
-$profile['view']['ui']['dev_public_path'] = "http://front.dev.tinycn.com/js/tinyphp-ui.js";
 $profile['view']['ui']['inject'] = TRUE;  //自动注入
-
 $profile['view']['ui']['template_plugin'] = '\\Tiny\\MVC\\View\\UI\\UIViewTemplatePlugin';
 $profile['view']['ui']['helper'] = '\\Tiny\\MVC\\View\\UI\\UIViewHelper';
 $profile['view']['ui']['template_dirname'] = '../vendor/saasjit/tinyphp-ui/templates/';
 
-$profile['plugins']['ui'] = '\Tiny\MVC\View\UI\UITemplatePlugin'; //添加调试pages的插件
+// ui dev
+$profile['view']['ui']['dev_enabled'] = TRUE;
+$profile['view']['ui']['dev_public_path'] = "http://front.dev.tinycn.com/js/tinyphp-ui.js";
+$profile['plugins']['ui_dev_plugin'] = '\Tiny\MVC\View\UI\UITemplatePlugin'; //添加调试pages的插件
 
+// ui installer
 $profile['view']['ui']['installer']['param_name'] = 'ui-install';
 $profile['view']['ui']['installer']['frontend_path'] = 'tinyphp-ui/';     //public目录下的相对安装路径
 $profile['view']['ui']['installer']['plugin'] = '\Tiny\MVC\View\UI\UIInstaller';
@@ -276,7 +272,7 @@ $profile['router']['rules'] = [
     ];
 
 
-
+$profile['view']['bootstrap']['enabled'] = TRUE;
 
 /**
  * application的源码设置
@@ -292,7 +288,13 @@ $profile['src']['common'] = 'libs/common/';         /*通用类*/
 $profile['src']['view'] = 'views/';             /*视图源码*/
 
 
-$profile['view']['bootstrap']['enabled'] = TRUE;
+
+
+
+/**
+ * response输出JSON时 默认指定的配置ID
+ */
+$profile['response']['formatJsonConfigId'] = 'status';
 
 /**
  * 需要添加绝对路径APPLICATION_PATH的配置项

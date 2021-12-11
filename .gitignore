@@ -8,6 +8,7 @@
 /vendor/
 .DS_Store
 *.phar
+runtime/view/*
 application/runtime/view/*
 public/setting
 public/profile
