@@ -20,7 +20,10 @@ $profile['debug']['enabled'] = TRUE;      /*是否开启调试模式: bool FALSE
 $profile['timezone'] = 'PRC';  /*设置时区*/
 $profile['charset'] = 'utf-8'; /*设置编码*/
 
-$profile['container']['config_path'] = 'container/app.php';
+/**
+ * 容器设置
+ */
+$profile['container']['config_path'] = 'containers/';
 
 /**
  * 异常模块
@@ -36,11 +39,6 @@ $profile['app']['namespace'] = 'App';        /*命名空间*/
 $profile['app']['resources'] = '../resource/';  /*资源文件夹*/
 $profile['app']['runtime'] = '../runtime/';     /*运行时文件夹*/
 $profile['app']['tmp'] = 'runtime/tmp/';     /*临时文件夹*/
-
-//服务注入管理
-$profile['service'] = [
-    
-];
 
 /* 
  * 插件配置

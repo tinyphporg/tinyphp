@@ -28,4 +28,4 @@ if (is_file(TINY_COMPOSER_FILE))
 *  ->run() Application运行
 */
 define('APPLICATION_PATH', dirname(__DIR__) . '/application/');
-\Tiny\Tiny::createApplication(APPLICATION_PATH, APPLICATION_PATH . 'config/app/profile.php')->run();
+\Tiny\Tiny::createApplication(APPLICATION_PATH, APPLICATION_PATH . 'config/profile.php')->run();
