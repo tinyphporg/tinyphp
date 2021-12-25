@@ -251,7 +251,7 @@ $profile['view']['ui']['template_dirname'] = '../vendor/saasjit/tinyphp-ui/templ
 
 // ui dev
 $profile['view']['ui']['dev_enabled'] = TRUE;
-$profile['view']['ui']['dev_public_path'] = "http://front.dev.tinycn.com/js/tinyphp-ui.js";
+$profile['view']['ui']['dev_public_path'] = "http://127.0.0.1:8080/js/tinyphp-ui.js";
 $profile['plugins']['ui_dev_plugin'] = '\Tiny\MVC\View\UI\UITemplatePlugin'; //添加调试pages的插件
 
 // ui installer
