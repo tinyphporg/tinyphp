@@ -137,8 +137,7 @@ class Main extends Controller
     public function langAction()
     {
         $frameworksName = $this->lang['frameworks_name'];
-        $this->response->appendBody($frameworksName);
-        $this->response->outFormatJSON('0');
+        $this->response->outFormatJSON('0', $frameworksName, ['aaa']);
     }
     
     /**

@@ -101,7 +101,7 @@ $profile['daemon']['policys'] = [
  * application配置模块设置
  */
 $profile['config']['enabled'] = TRUE;   /* 是否开启默认配置模块 */
-$profile['config']['path'] = 'config/config'; /* 配置文件相对路径 */
+$profile['config']['path'] = 'config/'; /* 配置文件相对路径 */
 $profile['config']['paths'] = [];       /*可加载多个扩展的配置文件或文件夹路径，必须为绝对或者相对路径 数据可覆盖*/
 $profile['config']['cache']['enabled'] = TRUE; /*配置模块缓存设置 提高性能*/
 
@@ -149,11 +149,19 @@ $profile['data']['policys'] = [
  *       driver=redis    Redis缓存    dataid=data数据池driver=redis配置ID
  */
 $profile['cache']['enabled'] = TRUE; /* 是否默认开启缓存模块，若不开启，则以下设置无效 */
-$profile['cache']['lifetime'] = 3600;
-$profile['cache']['filepath'] = 'runtime/cache/'; /*文件缓存方式的缓存相对路径*/
-$profile['cache']['policys'] = [
-    ['id' => 'default', 'driver' => 'redis', 'lifetime' => 3600, 'dataid' => 'redis_cache'],
-    ['id' => 'file', 'driver' => 'file', 'lifetime' => 3600, 'path' => '']
+$profile['cache']['ttl'] = 3600;
+$profile['cache']['path'] = 'runtime/cache/';
+$profile['cache']['storage']['default_id'] = 'default';
+
+// 扩展缓存适配器
+$profile['cache']['storage']['adapters'] = [
+//    'file' => Tiny\Cache\File::class  
+];  
+
+// 缓存配置
+$profile['cache']['storage']['config'] = [
+    ['id' => 'default', 'storage' => 'redis', 'options' => ['ttl' => 3600, 'dataid' => 'redis_cache']],
+    ['id' => 'file', 'storage' => 'file', 'options' => ['ttl' => 3600, 'storage_path' => '']]
 ];
 
 /**
