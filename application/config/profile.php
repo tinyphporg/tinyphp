@@ -40,6 +40,7 @@ $profile['app']['resources'] = '../resource/';  /*资源文件夹*/
 $profile['app']['runtime'] = '../runtime/';     /*运行时文件夹*/
 $profile['app']['tmp'] = 'runtime/tmp/';     /*临时文件夹*/
 
+
 /* 
  * 插件配置
  */
@@ -328,7 +329,8 @@ $profile['path'] = [
 			'src.model',
 			'src.common',
             'daemon.piddir',
-            'daemon.logdir'
+            'daemon.logdir',
+            'container.config_path'
 ];
 
 /**
