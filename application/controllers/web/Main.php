@@ -17,18 +17,37 @@ namespace App\Controller;
 
 use Tiny\MVC\Controller\Controller;
 use Tiny\Cache\Cache;
+use Tiny\DI\ContainerInterface;
+use Tiny\MVC\Request\WebRequest;
+use Tiny\MVC\Application\Properties;
+use App\Model\Main\User\UserInfo;
 
 /**
  * an example of main controller
  */
 class Main extends Controller
 {
+    /**
+     * @inject
+     * 
+     * @var unknown
+     */
+    protected UserInfo $userinfoModel;
     
     /**
-     * main/index
+     * @inject
+     */
+    public function a()
+    {
+        
+    }
+    
+    /**
+     * @param unknown $a
+     * @return unknown
      */
     public function indexAction()
-    {
+    {   
         $actionName = $this->request->get->formatString('a');
         $controllerName = $this->request->get->formatString('c');
         $name = $this->request->get->formatString('name', 'tinyphp');

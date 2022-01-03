@@ -8,10 +8,14 @@ use Tiny\Cache\Cache;
 //use App\Model\Main\UserInfo;
 
 return [
-    Cache::class,
-    View::class => function(Properties $properties, ApplicationBase $app) {
-        $viewInstance = new \Tiny\MVC\View\View($properties->app);
-        return $viewInstance;
-    }
+    View::class,  
+    /**
+     * @press('/aaa','/aaa')
+     * @inject(name="aaa",)
+     */
+   // View::class => function(Properties $properties, ApplicationBase $app) {
+   //     $viewInstance = new \Tiny\MVC\View\View($properties->app);
+   //     return $viewInstance;
+    //}
 ]
 ?>
