@@ -21,6 +21,8 @@ use Tiny\DI\ContainerInterface;
 use Tiny\MVC\Request\WebRequest;
 use Tiny\MVC\Application\Properties;
 use App\Model\Main\User\UserInfo;
+use Tiny\DI\Container;
+use Tiny\MVC\ApplicationBase;
 
 /**
  * an example of main controller
@@ -46,7 +48,7 @@ class Main extends Controller
      * @param unknown $a
      * @return unknown
      */
-    public function indexAction()
+    public function indexAction(Container $container)
     {   
         $actionName = $this->request->get->formatString('a');
         $controllerName = $this->request->get->formatString('c');

@@ -14,7 +14,8 @@
  */
 namespace App\Common;
 
-use Tiny\MVC\Bootstrap\Base;
+use Tiny\MVC\Bootstrap\Bootstrap as Base;
+use Tiny\MVC\ApplicationBase;
 
 /**
  * 引导初始化程序
@@ -25,12 +26,15 @@ use Tiny\MVC\Bootstrap\Base;
 class Bootstrap extends Base
 {
     /**
+     * @autowired
+     * 
      * 可加载额外的lib
      * 
      * @return void
      */
-    public function initImports($app)
+    public function imports(ApplicationBase $app)
     {
+        //echo 'bootstrap';
     }
     
     /**
@@ -38,8 +42,9 @@ class Bootstrap extends Base
      * 
      * @return void
      */
-    public function initConfig($app)
-    {  
+    public function initConfig(ApplicationBase $app)
+    {
+      //  echo 'config';    
     }
 }
 ?>
