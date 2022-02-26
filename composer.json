@@ -2,7 +2,7 @@
     "name": "opensaas/tinyphp",
     "description": "Scaffold for tinyphp-framework.",
     "type": "project",
-      "minimum-stability": "stable",
+    "minimum-stability": "stable",
     "require": {
         "php": ">= 7.0.0",
         "opensaas/tinyphp-framework": ">= 2.0.0",
