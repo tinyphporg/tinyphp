@@ -20,9 +20,24 @@ use Tiny\Cache\Cache;
 use Tiny\DI\ContainerInterface;
 use Tiny\MVC\Request\WebRequest;
 use Tiny\MVC\Application\Properties;
-use App\Model\Main\User\UserInfo;
+use App\Model\Main\User\UserInfo as UserInfoa;
 use Tiny\DI\Container;
 use Tiny\MVC\ApplicationBase;
+use App\Model\Main\UserInfo;
+use Tiny\Lang\Lang;
+use Tiny\Config\Configuration;
+use Tiny\MVC\Request\Param\Get;
+use Tiny\Cache\CacheInterface;
+use Tiny\Cache\Storager\File;
+use Tiny\Cache\Storager\Memcached;
+use Tiny\String\Pinyin;
+use Tiny\Net\Ssh\Connector;
+use Tiny\Net\IpArea;
+use Tiny\Cache\Storager\Redis;
+use Tiny\Cache\Storager\PHP;
+use Tiny\MVC\Web\HttpSession;
+use Tiny\MVC\Web\HttpCookie;
+use App\C\A;
 
 /**
  * an example of main controller
@@ -32,30 +47,38 @@ class Main extends Controller
     /**
      * @inject
      * 
-     * @var unknown
+     * @var 
      */
     protected UserInfo $userinfoModel;
     
-    /**
-     * @inject
-     */
-    public function a()
-    {
-        
-    }
+
     
     /**
      * @param unknown $a
      * @return unknown
      */
-    public function indexAction(Container $container)
+    public function indexAction(HttpCookie $cookie, Get $get, UserInfo $userinfoModel, PHP $cache, Configuration $config, Lang $lang, HttpSession $session)
     {   
-        $actionName = $this->request->get->formatString('a');
+        new A();
+        $session['a'] = 'x23242';
+        echo $session['a'] . "<br>";
+        echo $cookie['aaa']. "<br>";
+        $cookie['aaa'] = 'adewdrwerew3';
+        
+       // phpinfo();
+        $actionName = $get->formatString('a');
         $controllerName = $this->request->get->formatString('c');
         $name = $this->request->get->formatString('name', 'tinyphp');
         $isName = $this->request->get->isRequired('name') ? 'true' : 'false';
+
+        echo $lang->translate('status.0','sss');
+        echo $config['example.default.b'];
+        //print_r(IpArea::get('114.114.114.114'));
+        //echo $lang->translate('frameworks_name');
+       // echo "aaa";
         // 模型使用
-        $userInfo = $this->mainUserInfoModel->getUsers();
+        $userInfo = $userinfoModel->getUsers();
+       // $this->log('tinyphp', $userInfo);
         $this->assign([
             'actionName' => $actionName,
             'controllerName' => $controllerName,
@@ -65,10 +88,15 @@ class Main extends Controller
             'users' => $userInfo,
             'users1' => $userInfo1
         ]);
-       return $this->view->messagebox->show('aaaaaas');
+        
+        echo "aaa";
+       // $cache->set('aa', 'xaaaaq');
+        echo $cache->get('aa');
+       //return $this->view->messagebox->show('aaaaaas');
        // $this->view->messagebox->show('aaa');
        // throw new DbException('aaaa');
-        $this->parse('main/index.htm');
+       
+     $this->parse('main/index.htm');
     }
     
     /**
@@ -129,7 +157,6 @@ class Main extends Controller
         
         // 模型使用
         $userInfo = $this->mainUserInfoModel->getUsers();
-        print_r($userInfo);
         $this->assign([
             'actionName' => $actionName,
             'controllerName' => $controllerName,

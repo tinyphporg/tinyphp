@@ -2,21 +2,27 @@
 namespace App\Controller\Console;
 
 use Tiny\Data\Db\DbException;
+use App\Model\Main\UserInfo;
+use Tiny\Lang\Lang;
+use Tiny\Config\Configuration;
 
 class Main extends \Tiny\MVC\Controller\ConsoleController
 {
-    public function onstart()
-    {
-        echo "\nonstart\n";
-    }
-
-    public function onstop()
-    {
-        echo "\nonstop\n";
-    }
+    /**
+     * @autowire
+     * 
+     * @var UserInfo
+     */
+    protected UserInfo $userinfo;
+    
 
     public function testAction()
     {
+        static $i;
+        if ($i > 10) {
+            exit(1);
+        }
+        $i++;
         echo "bbbbbbbbbb";
     }
     public function index1Action()
@@ -24,23 +30,26 @@ class Main extends \Tiny\MVC\Controller\ConsoleController
         echo "demo1" . $this->config['status.index'];
     }
     
-    public function indexAction()
+    public function indexAction(UserInfo $userinfo, Lang $lang, Configuration $config)
     {
         
         $actionName = $this->request->get['a'];
         $controllerName = $this->request->get['c'];
         $name = $this->request->get['name'];
         
+        echo $lang->translate('status.0','sss');
+        echo $config['example.default.b'];
+        
         //$isName = $this->request->get->isRequired('name') ? 'true' : 'false';
         // 模型使用
-        $userInfo = $this->mainUserInfoModel->getUsers();
+        $userInfos = $userinfo->getUsers();
         $this->assign([
             'actionName' => $actionName,
             'controllerName' => $controllerName,
             'name' => $name,
             'defName' => 'tinyphp',
             'isName' => $isName,
-            'users' => $userInfo,
+            'users' => $userInfos,
             'users1' => $userInfo1
         ]);
         echo "aa1";

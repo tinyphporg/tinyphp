@@ -1,17 +1,15 @@
 {
-    "name": "saasjit/tinyphp",
-    "description": "a framework for php",
+    "name": "opensaas/tinyphp",
+    "description": "Scaffold for tinyphp-framework.",
     "type": "project",
+      "minimum-stability": "stable",
     "require": {
         "php": ">= 7.0.0",
-        "saasjit/tinyphp-framework": "dev-master",
-        "saasjit/tinyphp-ui": "dev-master",
-        "psr/container": "^2.0",
-        "psr/cache": "^1.0",
-        "psr/simple-cache": "^1.0"
+        "opensaas/tinyphp-framework": ">= 2.0.0",
+        "opensaas/tinyphp-ui": ">= 2.0.0"
     },
     "license": "Apache-2.0",
-    "version": "1.0.0",
+    "version": "2.0.0",
     "author": {
         "name": "tinycn",
         "email": "tinycn@qq.com"
@@ -20,9 +18,5 @@
         "post-update-cmd": "php ./public/index.php  --ui-install"
     },
     "autoload": {
-        "psr-4": {
-            "Tiny\\": "src/"
-        }
-    },
-    "minimum-stability": "dev"
+    }
 }

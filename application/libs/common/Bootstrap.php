@@ -1,4 +1,4 @@
-<?php 
+<?php
 /**
  *
  * @copyright (C), 2013-, King.
@@ -15,36 +15,34 @@
 namespace App\Common;
 
 use Tiny\MVC\Bootstrap\Bootstrap as Base;
-use Tiny\MVC\ApplicationBase;
+use Tiny\MVC\Application\ApplicationBase;
 
 /**
  * 引导初始化程序
- * 
- * 加载额外的lib config等
  *
+ * 加载额外的lib config等
  */
 class Bootstrap extends Base
 {
+    
     /**
-     * @autowired
-     * 
-     * 可加载额外的lib
-     * 
+     *
+     * @autowired 可加载额外的lib
+     *           
      * @return void
      */
     public function imports(ApplicationBase $app)
     {
-        //echo 'bootstrap';
+        // echo 'bootstrap';
     }
     
     /**
      * 可加载额外的配置文件
-     * 
+     *
      * @return void
      */
     public function initConfig(ApplicationBase $app)
     {
-      //  echo 'config';    
     }
 }
 ?>
