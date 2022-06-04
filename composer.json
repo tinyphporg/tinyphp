@@ -1,18 +1,18 @@
 {
-    "name": "tinyframework/tinyphp",
+    "name": "tinyphporg/tinyphp",
     "description": "Scaffold for tinyphp-framework.",
     "type": "project",
     "minimum-stability": "stable",
     "require": {
         "php": ">= 7.3.0",
-        "tinyphp/tinyphp-framework": ">= 2.0.0",
-        "tinyphp/tinyphp-ui": ">= 2.0.0"
+        "tinyphporg/tinyphp-framework": ">= 2.0.0",
+        "tinyphporg/tinyphp-ui": ">= 2.0.0"
     },
     "license": "Apache-2.0",
     "version": "2.0.0",
     "author": {
         "name": "tinycn",
-        "email": "da.jin@opensaas.net"
+        "email": "tinycn@qq.com"
     },
     "scripts": {
         "post-update-cmd": "php ./public/index.php  --ui-install"
