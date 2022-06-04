@@ -12,7 +12,7 @@
  *          King 2021年8月31日上午11:19:50 1 修改
  *          King 2021年8月31日上午11:19:50 stable 1.0.01 审定
  */
-namespace App\Common;
+namespace App\Event;
 
 use Tiny\MVC\Bootstrap\Bootstrap as Base;
 use Tiny\MVC\Application\ApplicationBase;
@@ -27,12 +27,13 @@ class Bootstrap extends Base
     
     /**
      *
-     * @autowired 可加载额外的lib
+     * @autowired 加载额外的lib
      *           
      * @return void
      */
     public function imports(ApplicationBase $app)
     {
+       /// echo "aaaa";
         // echo 'bootstrap';
     }
     

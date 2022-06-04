@@ -15,6 +15,7 @@
 namespace App\Model\Main\User;
 
 use Tiny\MVC\Model\Redis;
+use App\Model\Main\UserInfo;
 
 /**
  * 
@@ -33,7 +34,14 @@ class UserInfoByRedis extends Redis
      * dataId of redis
      * @var string
      */
-    protected $_dataId = 'redis';
+    protected $dataId = 'redis';
+    
+    /**
+     * @autowired
+     * 
+     * @var UserInfo
+     */
+    protected UserInfo $userinfoModel;
     
     /**
      * get userinfo
@@ -41,7 +49,7 @@ class UserInfoByRedis extends Redis
      */
     public function getUsers()
     {
-        $users = $this->MainUserInfoModel->getUsers();
+        $users = $this->userinfoModel->getUsers();
         $ht = $this->createHashTable(self::HAST_USERINFO_ID);
         $ht->set($users);
         return $ht->getAll();

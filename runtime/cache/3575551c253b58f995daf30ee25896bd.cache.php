@@ -1,6 +1,6 @@
 <?php
  return array (
-  'expriation' => 1645866568,
+  'expriation' => 1651984017,
   'value' => 
   array (
     'example' => 
@@ -11,7 +11,7 @@
       ),
       'default' => 
       array (
-        'b' => 'b',
+        'b' => 'xxxbxxx',
       ),
       'setting' => 
       array (
@@ -39,7 +39,7 @@
       array (
         'enabled' => true,
         'param_name' => 'debug',
-        'eventListener' => 'Tiny\\MVC\\Event\\Listener\\DebugEventListener',
+        'event_listener' => 'Tiny\\MVC\\Event\\DebugEventListener',
         'cache' => 
         array (
           'enabled' => true,
@@ -48,9 +48,12 @@
       ),
       'timezone' => 'PRC',
       'charset' => 'utf-8',
+      'namespace' => 'App',
       'container' => 
       array (
-        'config_path' => 'containers/',
+        'enabled' => true,
+        'provider_path' => 'containers/',
+        'autowired' => true,
       ),
       'exception' => 
       array (
@@ -58,63 +61,35 @@
         'log' => true,
         'logid' => 'tinyphp_exception',
       ),
-      'app' => 
-      array (
-        'namespace' => 'App',
-      ),
       'event' => 
       array (
         'enabled' => true,
         'listeners' => 
         array (
-          'view-ui' => 'Tiny\\MVC\\View\\UI\\UITemplateEventLister',
         ),
       ),
-      'bootstrap' => 
+      'module' => 
       array (
         'enabled' => true,
-        'eventListeners' => 'App\\Common\\Bootstrap',
-      ),
-      'router' => 
-      array (
-        'enabled' => true,
-        'routes' => 
+        'event_listener' => 'Tiny\\MVC\\Module\\ModuleManager',
+        'path' => 
         array (
+          0 => 'modules/',
+          1 => '../vendor/opensaas',
         ),
-        'rules' => 
+        'activated_modules' => 
         array (
-          0 => 
-          array (
-            'route' => 'pathinfo',
-            'rule' => 
-            array (
-              'ext' => '.html',
-              'domain' => '*.tinycn.com',
-            ),
-          ),
-          1 => 
-          array (
-            'route' => 'regex',
-            'rule' => 
-            array (
-              'regex' => '/main\\/index-(\\d+)-12-112-112\\.html/',
-              'keys' => 
-              array (
-                'controller' => 'main',
-                'action' => 'index',
-                'id' => '$1',
-              ),
-              'ext' => '.html',
-              'domain' => '*.tinycn.com',
-            ),
-          ),
+          0 => 'opensaas-pro',
+          1 => 'system',
         ),
+        'default' => '',
+        'param' => 'm',
       ),
       'builder' => 
       array (
         'enabled' => true,
         'param_name' => 'build',
-        'eventListener' => 'Tiny\\MVC\\Event\\Listener\\BuilderEventListener',
+        'event_listener' => 'Tiny\\MVC\\Event\\BuilderEventListener',
         'path' => 'build/builder',
         'config_path' => 'build/config',
         'profile_path' => 'build/profile',
@@ -123,9 +98,8 @@
       array (
         'enabled' => true,
         'id' => 'tinyphp-daemon',
-        'eventListener' => 'Tiny\\MVC\\Event\\Listener\\DaemonEventListener',
+        'event_listener' => 'Tiny\\MVC\\Event\\DaemonEventListener',
         'piddir' => '{runtime}/pid/',
-        'logdir' => '{runtime}/log/',
         'tick' => 2,
         'policys' => 
         array (
@@ -176,13 +150,9 @@
       array (
         'enabled' => true,
         'path' => 'config/',
-        'paths' => 
-        array (
-        ),
         'cache' => 
         array (
           'enabled' => true,
-          'cache_id' => 'php',
         ),
       ),
       'lang' => 
@@ -224,6 +194,7 @@
             'driver' => 'redis',
             'host' => '127.0.0.1',
             'port' => '6379',
+            'db' => 0,
           ),
           2 => 
           array (
@@ -275,12 +246,12 @@
       array (
         'enabled' => true,
         'ttl' => 3600,
-        'path' => '{runtime}/cache/',
+        'dir' => '{runtime}/cache/',
         'default_id' => 'default',
         'storagers' => 
         array (
         ),
-        'config' => 
+        'sources' => 
         array (
           0 => 
           array (
@@ -324,6 +295,15 @@
           ),
         ),
       ),
+      'filter' => 
+      array (
+        'enabled' => true,
+        'web' => 'Tiny\\Filter\\WebFilter',
+        'console' => 'Tiny\\Filter\\ConsoleFilter',
+        'filters' => 
+        array (
+        ),
+      ),
       'session' => 
       array (
         'enabled' => true,
@@ -333,15 +313,6 @@
         'adapter' => 'memcached',
         'dataid' => 'memcached',
       ),
-      'filter' => 
-      array (
-        'enabled' => true,
-        'web' => '\\Tiny\\Filter\\WebFilter',
-        'console' => '\\Tiny\\Filter\\ConsoleFilter',
-        'filters' => 
-        array (
-        ),
-      ),
       'cookie' => 
       array (
         'domain' => '',
@@ -349,6 +320,51 @@
         'expires' => 3600,
         'prefix' => '',
         'encode' => false,
+      ),
+      'bootstrap' => 
+      array (
+        'enabled' => true,
+        'event_listener' => 'App\\Event\\Bootstrap',
+      ),
+      'response' => 
+      array (
+        'formatJsonConfigId' => 'status',
+      ),
+      'router' => 
+      array (
+        'enabled' => true,
+        'routes' => 
+        array (
+        ),
+        'rules' => 
+        array (
+          0 => 
+          array (
+            'route' => 'pathinfo',
+            'rule' => 
+            array (
+              'ext' => '.html',
+              'domain' => '*.tinycn.com',
+            ),
+          ),
+          1 => 
+          array (
+            'route' => 'regex',
+            'rule' => 
+            array (
+              'regex' => '/^\\/user\\/.*/i',
+              'values' => 
+              array (
+                'module' => 'opensaas-pro',
+                'controller' => 'main',
+                'action' => 'index',
+                'id' => '$1',
+              ),
+              'ext' => '.html',
+              'domain' => '*.tinycn.com',
+            ),
+          ),
+        ),
       ),
       'controller' => 
       array (
@@ -364,39 +380,26 @@
         'src' => 'controller/',
         'default' => 'main',
         'param' => 'c',
+        'action_default' => 'index',
+        'action_param' => 'a',
       ),
       'model' => 
       array (
         'namespace' => 'Model',
         'src' => 'models/',
       ),
-      'action' => 
-      array (
-        'default' => 'index',
-        'param' => 'a',
-      ),
-      'response' => 
-      array (
-        'formatJsonConfigId' => 'status',
-      ),
       'view' => 
       array (
-        'src' => 'views/',
-        'template_dirname' => 'default',
-        'lang' => 
+        'basedir' => 'views/',
+        'theme' => 'default',
+        'lang' => true,
+        'paths' => 
         array (
-          'enabled' => true,
         ),
         'compile' => '{runtime}/view/compile/',
         'config' => '{runtime}/view/config/',
         'assign' => 
         array (
-        ),
-        'cache' => 
-        array (
-          'enabled' => false,
-          'dir' => '{runtime}/view/cache/',
-          'lifetime' => 120,
         ),
         'engines' => 
         array (
@@ -409,22 +412,18 @@
           'enabled' => true,
           'public_path' => '/tinyphp-ui/',
           'inject' => true,
-          'template_plugin' => 'Tiny\\MVC\\View\\UI\\UIViewTemplatePlugin',
-          'helper' => 'Tiny\\MVC\\View\\UI\\UIViewHelper',
-          'template_dirname' => '../vendor/saasjit/tinyphp-ui/templates/',
+          'template_plugin' => 'Tiny\\MVC\\View\\UI\\Template\\UIViewTemplatePlugin',
+          'helper' => 'Tiny\\MVC\\View\\UI\\Helper\\UIViewHelper',
+          'template_dirname' => '{vendor}/opensaas/tinyphp-ui/templates/',
           'dev_enabled' => true,
           'dev_public_path' => 'http://127.0.0.1:8080/js/tinyphp-ui.js',
+          'dev_event_listener' => 'Tiny\\MVC\\View\\UI\\EventListener\\UIDebugEventListener',
           'installer' => 
           array (
             'param_name' => 'ui-install',
             'frontend_path' => 'tinyphp-ui/',
-            'eventListener' => 'Tiny\\MVC\\View\\UI\\UIInstaller',
-            'config_path' => 'config/tinyphp-ui.php',
+            'event_listener' => 'Tiny\\MVC\\View\\UI\\EventListener\\UIInstallerEventListener',
           ),
-        ),
-        'bootstrap' => 
-        array (
-          'enabled' => true,
         ),
       ),
       'src' => 
@@ -433,15 +432,15 @@
         'resources' => '{app}../resource/',
         'runtime' => '{app}../runtime/',
         'tmp' => '{runtime}tmp/',
-        'global' => 'libs/global/',
-        'library' => 'libs/vendor/',
+        'global' => 'librarys/global/',
+        'library' => 'librarys/',
         'controller' => 'controllers/web/',
         'model' => 'models/',
         'console' => 'controllers/console/',
         'rpc' => 'controllers/rpc/',
-        'common' => 'libs/common/',
         'view' => 'views/',
-        'aclass' => 'libs/common/a.php',
+        'vendor' => '{app}../vendor/',
+        'event' => 'events/',
       ),
       'path' => 
       array (
@@ -449,44 +448,46 @@
         1 => 'src.runtime',
         2 => 'src.resources',
         3 => 'src.tmp',
-        4 => 'builder.path',
-        5 => 'builder.profile_path',
-        6 => 'builder.config_path',
-        7 => 'config.path',
-        8 => 'lang.path',
-        9 => 'log.path',
-        10 => 'cache.path',
-        11 => 'view.src',
-        12 => 'view.cache.dir',
-        13 => 'view.compile',
-        14 => 'view.config',
-        15 => 'view.ui.template_dirname',
-        16 => 'src.library',
-        17 => 'src.global',
-        18 => 'src.controller',
-        19 => 'src.console',
-        20 => 'src.rpc',
-        21 => 'src.model',
-        22 => 'src.common',
-        23 => 'daemon.piddir',
-        24 => 'daemon.logdir',
-        25 => 'container.config_path',
-        26 => 'src.aclass',
+        4 => 'src.vendor',
+        5 => 'builder.path',
+        6 => 'builder.profile_path',
+        7 => 'builder.config_path',
+        8 => 'config.path',
+        9 => 'lang.path',
+        10 => 'log.path',
+        11 => 'cache.dir',
+        12 => 'view.basedir',
+        13 => 'view.cache.dir',
+        14 => 'view.compile',
+        15 => 'view.config',
+        16 => 'view.ui.template_dirname',
+        17 => 'src.library',
+        18 => 'src.global',
+        19 => 'src.controller',
+        20 => 'src.console',
+        21 => 'src.rpc',
+        22 => 'src.model',
+        23 => 'src.common',
+        24 => 'src.event',
+        25 => 'daemon.piddir',
+        26 => 'daemon.logdir',
+        27 => 'container.config_path',
+        28 => 'module.path',
       ),
       'autoloader' => 
       array (
         'namespaces' => 
         array (
+          'App' => 'src.library',
           'App\\Controller' => 'src.controller',
           'App\\Controller\\Console' => 'src.console',
           'App\\Controller\\Rpc' => 'src.rpc',
           'App\\Model' => 'src.model',
-          'App\\Common' => 'src.common',
+          'App\\Event' => 'src.event',
           '*' => 'src.global',
         ),
         'classes' => 
         array (
-          'App\\C\\A' => 'src.aclass',
         ),
         'is_realpath' => false,
       ),

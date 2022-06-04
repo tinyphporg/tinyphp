@@ -46,7 +46,7 @@ class UserInfo extends Db
      */
     public function getUsers()
     {
-        return $this->fetchall('SELECT host,user FROM :0t WHERE :1', 'user', "user='root'");
+        return $this->fetchall('SELECT :2f, host,user FROM :0t WHERE :1', 'user', "user='root'", '*');
     }
 }
 ?>

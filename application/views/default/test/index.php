@@ -1,8 +1,4 @@
-<html>
-<head>
-<title>Tinyphp frameworks for PHP</title>
-</head>
-<body>
+
 	<div>
 		<h3>Hello World!-By PHP Engine</h3>
 
@@ -14,8 +10,6 @@
 		</ul>
 		      
 	</div>
-</body>
-</html>
 <?php 
 var_export($users);
 ?>

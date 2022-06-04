@@ -1,5 +1,5 @@
 <?php
 return [
-    'index' => "111dfsdf"
+    'index' => "profile.index" . __FILE__
 ];
 ?>

@@ -26,7 +26,7 @@ php public/index.php -d
 
 #配置文件 application/config/profile.php
 ``` 
-核心组件
+框架支持
 ====
 
 ### tinyphp-framwork   
