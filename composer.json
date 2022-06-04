@@ -1,5 +1,5 @@
 {
-    "name": "tinyphporg/tinyphp",
+    "name": "tinyframework/tinyphp",
     "description": "Scaffold for tinyphp-framework.",
     "type": "project",
     "minimum-stability": "stable",
