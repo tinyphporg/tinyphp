@@ -16,7 +16,9 @@
 namespace App\Controller;
 
 use Tiny\MVC\Controller\Controller;
+use Tiny\Runtime\Runtime;
 use Tiny\Config\Configuration;
+use Tiny\MVC\Request\Request;
 
 /**
 * An example of main controller
@@ -26,13 +28,13 @@ use Tiny\Config\Configuration;
 * @final 2022年6月4日下午8:52:14
 */
 class Main extends Controller
-{
+{   
     /**
      * 首页
-     * 
-     * @param Configuration $config 配置实例
+     * @param Request $request 当前请求实例
+     * @param Configuration $config 当前应用实例
      */
-    public function indexAction(Configuration $config)
+    public function indexAction(Request $request, Configuration $config)
     {
        $this->display('main/index.htm');
     }

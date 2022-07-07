@@ -31,11 +31,11 @@ $profile = [];
  *      时区 默认为东八区北京时间
  *  
  *  charset 
- *      输出编码
+ *      输出编码 默认为utf-8
  *
  *  namespace
- *      应用实例下，所有命名空间的统一前缀
- *      多个项目时，可单独命名区分
+ *      当前application的应用实例下，所有类的根命名空间
+ *      在设置多个项目的应用实例时时，可单独命名区分
  */
 $profile['debug']['enabled'] = true;
 $profile['timezone'] = 'PRC';
@@ -56,20 +56,18 @@ $profile['namespace']= 'App';
  *          调用函数时自动解析参数，从容器中获取实例并注入
  * 
  *  container.enabled 
- *      当前application是否开启容器加载
+ *      当前application实例默认开启容器加载
  *  
- *  container.provider_path 容器配置路径
- *      array [file|dir] 设置多个容器路径
+ *  container.provider_path 应用的容器配置文件路径
+ *      array [file|dir] 可设置多个容器路径
  *      string file  设置单个文件为容器配置文件
  *      string dir   设置单个路径为容器配置文件集合
  *  
  *  container.autowired
- *      是否启用容器自动注解
+ *      默认启用容器自动注解
  * 
  */
-$profile['container']['enabled'] = true;
 $profile['container']['provider_path'] = 'containers/';
-$profile['container']['autowired'] = true;
 $profile['container']['alias'] = [];
 $profile['container']['definitions'] = [];
 
@@ -92,10 +90,10 @@ $profile['exception']['log'] = true;
 $profile['exception']['logid'] = 'tinyphp_exception';
 
 /**
- * 事件处理机制
+ * 事件管理
  * 
  * EventManager
- *      事件管理器基于runtime中初始化，引入到application实例中，，主要应用在异常事件处理，和MVC的控制器事件处理
+ *      事件管理器在runtime中初始化，引入到application实例中，，主要应用在异常事件处理，和MVC的控制器事件处理
  *      
  * event.enabled 
  *      true 开启 false 关闭 则所有插件都受影响
@@ -107,19 +105,75 @@ $profile['event']['enabled'] = true;
 $profile['event']['listeners'] = [];
 
 /**
- * 模块化路由
+ * application的路径设置
+ *
+ *  {app} 默认为APPLICATION_PATH
+ *  每个src.nodename可作为标签{nodename}按顺序在后续的路径中被自动替换
+ *
+ * src.path
+ *      application的根路径
+ *
+ * src.public
+ *      入口文件夹，存放静态文件和项目文件夹
+ *
+ * src.resources
+ *      资源文件的存放目录 一般与application目录平行
+ *
+ * src.runtime
+ *      运行时文件存放目录
+ *
+ * src.tmp
+ *      运行时的临时文件夹
+ *
+ * src.global
+ *      存放全局类的文件夹
  */
-$profile['module']['enabled'] = true;
-$profile['module']['event_listener'] = \Tiny\MVC\Module\ModuleManager::class;
-$profile['module']['path'] = ['modules/', '../vendor/opensaas'];
-$profile['module']['activated_modules'] = ['opensaas'];
-$profile['module']['default'] = '';
-$profile['module']['param'] = 'm';
+$profile['src']['path'] = '{app}';                    // application源码路径
+$profile['src']['public'] = '{app}../public/';        // 入口文件夹
+$profile['src']['static'] = '{public}static/';        // 静态资源文件夹
+$profile['src']['resources'] = '{app}../resource/';   // 资源文件夹
+$profile['src']['runtime'] = '{app}../runtime/';      // 运行时文件夹
+$profile['src']['tmp'] = '{runtime}tmp/';             // 临时文件夹
+$profile['src']['global'] = 'librarys/global/';           // 存放全局类的文件夹
+$profile['src']['library'] = 'librarys/';          // 除了composer外，引入的其他项目的库文件夹
+$profile['src']['controller'] = 'controllers/web/';   // web环境下的控制器类文件夹
+$profile['src']['model'] = 'models/';                 // 模型类文件夹
+$profile['src']['console'] = 'controllers/console/';  // 命令行环境下的控制器类文件夹
+$profile['src']['rpc'] = 'controllers/rpc/';          // rpc模式下的控制器类文件夹
+$profile['src']['view'] = 'views/';                   // 存放、、】视图模板的文件夹
+$profile['src']['vendor'] = '{app}../vendor/';
+$profile['src']['event'] = 'events/';
+$profile['src']['common'] = 'librarys/common/';
+
+/**
+ * 调试模式
+ *
+ * debug.enabled 默认开启调试模式
+ *      true 开启 应用于开发环境 | false 关闭 应用于线上环境
+ *
+ * debug.event_listener
+ *      监听事件并处理的调试器事件监听
+ *
+ * debug.param_name
+ *      ConsoleApplication环境下，监听到--debug命令行参数，即开启调试信息输出
+ *      web环境下，监听到控制器=debug时，即输出debug调试信息
+ *
+ * debug.console 仅在WebApplication环境下生效
+ *      输出debug信息到浏览器的console控制台
+ * 
+ * debug.cache.enabled
+ *  控制在调试模式下，是否进行应用缓存
+ */
+// $profile['debug']['enabled'] = true;
+$profile['debug']['event_listener'] = \Tiny\MVC\Event\DebugEventListener::class;
+$profile['debug']['param_name'] = 'debug';
+$profile['debug']['cache']['enabled'] = true;
+$profile['debug']['console'] = false;
 
 /**
  * 打包器
  * 
- * 仅在命令行环境下
+ * 仅在命令行环境的ConsoleApplication实例生效
  * 
  * builder.enabled 是否开启单文件打包器
  *      true 开启  false 关闭监听
@@ -148,30 +202,9 @@ $profile['builder']['config_path'] = 'build/config';
 $profile['builder']['profile_path'] = 'build/profile';
 
 /**
- * 调试器
- * 
- * debug.enabled 默认开启
- *      true 开启 应用于开发环境 | false 关闭 应用于线上环境
- *      
- * debug.event_listener  
- *      监听事件并处理的调试器事件监听
- *     
- * debug.param_name 
- *      console环境下，监听到--debug命令行参数，即开启调试信息输出
- *      web环境下，监听到控制器=debug时，即输出debug调试信息
- *           
- * debug.console 仅在web环境下生效
- *      输出debug信息到浏览器的console控制台
- */
-$profile['debug']['param_name'] = 'debug';
-$profile['debug']['event_listener'] = \Tiny\MVC\Event\DebugEventListener::class;
-$profile['debug']['cache']['enabled'] = true;
-$profile['debug']['console'] = false;
-
-/**
  * 守护进程的基本设置
  * 
- * 仅在命令行模式下生效
+ * 仅在命令行环境的ConsoleApplication实例生效
  * 
  * daemon.enabled 
  *      是否开启自动监听Daemon的命令行参数监听
@@ -223,9 +256,9 @@ $profile['daemon']['daemons'] = [
 
 
 /**
- * Application的配置实例
+ * 当前Application实例下的Configuration实例设置
  * 
- * config.enabled 是否开启配置实例化
+ * config.enabled 是否开启配置
  *      true 开启 | false 关闭
  *  
  * config.path 配置文件的相对路径
@@ -260,7 +293,6 @@ $profile['lang']['enabled'] = true;          // 是否开启
 $profile['lang']['locale'] = 'zh_cn';        // 默认语言包
 $profile['lang']['path'] = 'lang/';          // 存放语言包的目录
 $profile['lang']['cache']['enabled'] = true; // 配置模块缓存设置 提高性能
-
 
 /**
  * application的日志配置
@@ -331,6 +363,13 @@ $profile['data']['sources'] = [
 /**
  * Application的缓存设置
  * 
+ * 支持的存储器类型
+ *      file => Tiny\Cache\Storager\File 文件存储 
+ *      memcached => Tiny\Cache\Storager\Memcached memcache存储
+ *      php      => Tiny\Cache\Storager\PHP PHP文件序列化存储
+ *      redis => Tiny\Cache\Storager\Redis  Redis存储
+ *      SingleCache => Tiny\Cache\Storager\SingleCache 单文件存储 适合小数据快速缓存
+ *      
  *  cache.enabled 开始缓存
  *      true 开启  | false 关闭
  * 
@@ -340,13 +379,16 @@ $profile['data']['sources'] = [
  * cache.dir 默认的本地文件缓存路径
  *      string dir 只可设置为文件夹
  *      
+ * cache.application_storager
+ *      string 当前应用实例的缓存存储器
+ *      
  * cache.default_id 默认的缓存资源ID
  *      $cache 将缓存实例当缓存调用时所调用的cacheID
  * 
  * cache.application 
  *      是否对application的lang container config等数据进行缓存
  * 
- * cache.storagers 缓存的存储器配置
+ * cache.storagers 缓存存储器的注册列表
  *      [
  *          key => value
  *          存储器ID => 存储器类全程
@@ -379,7 +421,6 @@ $profile['data']['sources'] = [
 $profile['cache']['enabled'] = true;
 $profile['cache']['ttl'] = 3600;
 $profile['cache']['dir'] = '{runtime}/cache/';
-$profile['cache']['application_storager'] = SingleCache::class;
 $profile['cache']['default_id'] = 'default';
 $profile['cache']['storagers'] = [];
 $profile['cache']['sources'] = [
@@ -389,6 +430,18 @@ $profile['cache']['sources'] = [
    ['id' => 'php', 'storager' => 'php', 'options' => ['ttl' => 3600, 'path' => '']]
 ];
 
+/**
+ * 当前应用实例的缓存配置
+ * 
+ * cache.application_storager ApplicationCache调用的存储器类型
+ *      默认为SingleCache 适合小数据的快速存储应用，php文件存储于opcache内存中，IO性能很好。
+ *      
+ * cache.application_ttl ApplicationCache的缓存过期时间
+ *      int 60
+ * 
+ */
+$profile['cache']['application']['storager'] = SingleCache::class;
+$profile['cache']['application']['ttl'] = 60;
 /**
  * application的过滤器配置
  * 
@@ -439,8 +492,8 @@ $profile['session']['enabled'] = true;
 $profile['session']['domain'] = '';
 $profile['session']['path'] = '/';
 $profile['session']['expires'] = 36000;
-$profile['session']['adapter'] = 'memcached';
-$profile['session']['dataid'] = 'memcached';
+$profile['session']['adapter'] = 'redis';
+$profile['session']['dataid'] = 'redis';
 
 /**
  * HTTP COOKIE设置
@@ -486,13 +539,13 @@ $profile['bootstrap']['enabled'] = true;
 $profile['bootstrap']['event_listener'] = \App\Event\Bootstrap::class;
 
 /**
- * Application的响应实例
+ * Application的响应实例配置
  *      
  * response.formatJsonConfigId     
- *    response输出JSON时 默认指定的配置ID
+ *    response格式化输出JSON 默认指定的语言包配置节点名
+ *    status => $this->lang['status'];
  */
 $profile['response']['formatJsonConfigId'] = 'status';
-
 
 /**
  * Application的路由设置
@@ -518,7 +571,7 @@ $profile['response']['formatJsonConfigId'] = 'status';
 $profile['router']['enabled'] = true;  // 是否开启router
 $profile['router']['routes'] = [];     // 注册自定义的route
 $profile['router']['rules'] = [
-    ['route' => 'pathinfo', 'rule' => ['ext' => '.html' , 'domain' => '*.tinycn.com']],
+    ['route' => 'pathinfo', 'rule' => ['ext' => '.html' , 'domain' => '*']],
 ];
 
 
@@ -614,13 +667,11 @@ $profile['model']['src'] = 'models/';
  *      默认不开启
  *  
  *  view.cache.dir 缓存目录
- *  view.cache.ttl 缓存过期时间    
- * 
- *      
+ *  view.cache.ttl 缓存过期时间
  */
 $profile['view']['basedir'] = 'views/';
 $profile['view']['theme'] = 'default';
-$profile['view']['lang'] = true;
+$profile['view']['lang'] = true;     //自动加载语言包
 $profile['view']['paths'] = [];
 $profile['view']['compile'] = '{runtime}/view/compile/';
 $profile['view']['config']  = '{runtime}/view/config/';
@@ -630,138 +681,33 @@ $profile['view']['assign'] = [];
 $profile['view']['engines'] = [];
 $profile['view']['helpers'] = [];
 
-
-/**
- * View 前端库设置
+/*
+ * 视图的全局静态资源配置
+ * 
+ * view.static.basedir 视图静态资源的存储根目录
+ *      {static} => $profile['src']['static']
+ * 
+ * view.static.public_path 视图静态资源的公开访问地址
+ *      /static/ 当前域名下的绝对路径
+ *      http://demo.com/static 可指定域名
  *      
- * view.ui.enabled 开启
- *      true 开启前确认是否通过composer/框架加载，引入了opensaas/tinyphp-ui库
- * 
- * view.ui.public_path 在前端源码展示的公共路径
- *      根目录下的绝对路径 /tinyphp-ui
- *      包含域名的绝对路径 demo.xxx.com/tinyphp-ui/
- *  
- *  view.ui.inject
- *      是否自动将ui库的公共路径，注入到html源码
- *      仅支持engine = template时
- *  
- *  view.ui.helper 
- *      ui前端库在view注册的助手类
- *      message 提示消息体
- *      pagination 分页
+ * view.static.engine 是否开启视图解析的模板引擎
+ *      当前支持css js 图像文件的自动解析和生成
+ *       
+ * view.static.minsize 静态模板引擎复制文件的最小大小
+ *      小于最小大小的，直接注入文件内容
+ *      大于最小大小的，在staic目录下生成对应外部文件在html下加载
  *      
- * view.ui.template_dirname 
- *      UI库的视图模板路径
- * 
- *  view.ui.dev_enabled 是否开启UI调试
- *      必须在tinyphp-ui 运行npm run dev后开启调试模式
- *  
- *  view.ui.dev_public_path 
- *      调试库在前端展现的URL
- *  
- *  view.ui.dev_event_listener 
- *      开启调试后的监听事件类
- * 
- * view.ui.installer ui自动安装器
- *      运行在每次composer更新时
- * 
- * view.ui.installer.param_name 
- *      监听的命令行参数
- * 
- * view.ui.installer.frontend_path 
- *      前端安装路径
- * 
- * view.ui.installer.event_listener 
- *      安装器的监听事件触发类
+ * view.static.exts 
+ *      view.static.engine支持解析的静态资源扩展名     
+ *      
  */
-$profile['view']['ui']['enabled'] = true;
-$profile['view']['ui']['public_path'] = '/tinyphp-ui/';
-$profile['view']['ui']['inject'] = true;
-$profile['view']['ui']['template_plugin'] = \Tiny\MVC\View\UI\Template\UIViewTemplatePlugin::class;
-$profile['view']['ui']['helper'] = \Tiny\MVC\View\UI\Helper\UIViewHelper::class;
-$profile['view']['ui']['template_dirname'] = '{vendor}/opensaas/tinyphp-ui/templates/';
 
-// UI前端库的开发设置
-$profile['view']['ui']['dev_enabled'] = true;
-$profile['view']['ui']['dev_public_path'] = "http://127.0.0.1:8080/js/tinyphp-ui.js";
-$profile['view']['ui']['dev_event_listener'] =  \Tiny\MVC\View\UI\EventListener\UIDebugEventListener::class;
-
-// UI composer更新时，检测UI并自动安装到public目录下
-$profile['view']['ui']['installer']['param_name'] = 'ui-install';
-$profile['view']['ui']['installer']['frontend_path'] = 'tinyphp-ui/';
-$profile['view']['ui']['installer']['event_listener'] = \Tiny\MVC\View\UI\EventListener\UIInstallerEventListener::class;
-
-/**
- * application的路径设置
- * 
- *  {app} 默认为APPLICATION_PATH
- *  每个src.nodename可作为标签{nodename}按顺序在后续的路径中被自动替换
- *  
- * src.path  
- *      application的根路径
- *      
- * src.resources 
- *      资源文件的存放目录 一般与application目录平行
- *      
- * src.runtime 
- *      运行时文件存放目录
- *      
- * src.tmp 
- *      运行时的临时文件夹
- *      
- * src.global 
- *      存放全局类的文件夹
- */
-$profile['src']['path'] = '{app}';                    // application源码路径
-$profile['src']['resources'] = '{app}../resource/';   // 资源文件夹
-$profile['src']['runtime'] = '{app}../runtime/';      // 运行时文件夹
-$profile['src']['tmp'] = '{runtime}tmp/';             // 临时文件夹
-$profile['src']['global'] = 'librarys/global/';           // 存放全局类的文件夹
-$profile['src']['library'] = 'librarys/';          // 除了composer外，引入的其他项目的库文件夹
-$profile['src']['controller'] = 'controllers/web/';   // web环境下的控制器类文件夹
-$profile['src']['model'] = 'models/';                 // 模型类文件夹
-$profile['src']['console'] = 'controllers/console/';  // 命令行环境下的控制器类文件夹
-$profile['src']['rpc'] = 'controllers/rpc/';          // rpc模式下的控制器类文件夹
-$profile['src']['view'] = 'views/';                   // 存放、、】视图模板的文件夹
-$profile['src']['vendor'] = '{app}../vendor/';
-$profile['src']['event'] = 'events/';
-$profile['src']['common'] = 'librarys/common/';
-/**
- * 需要做路径处理的路径节点列表
- *      [propertis.nodename...]
- *      作为路径传递的配置节点名，在相对路径前添加application_path的绝对路径，并替换src里的标签,./,../,相对路径等。
- */
-$profile['path'] = [
-            'src.path',
-            'src.runtime',
-            'src.resources',
-            'src.tmp',
-            'src.vendor',
-            'builder.path',
-            'builder.profile_path',
-            'builder.config_path',
-            'config.path',
-            'lang.path',
-            'log.path',
-            'cache.dir',
-            'view.basedir',
-            'view.cache.dir',
-            'view.compile',
-            'view.config',
-            'view.ui.template_dirname',
-            'src.library',
-            'src.global',
-			'src.controller',
-			'src.console',
-			'src.rpc',
-			'src.model',
-			'src.common',
-            'src.event',
-            'daemon.piddir',
-            'daemon.logdir',
-            'container.provider_path',
-            'module.path',
-];
+$profile['view']['static']['basedir'] = '{static}';
+$profile['view']['static']['public_path'] = '/static/';
+$profile['view']['static']['engine'] = true;
+$profile['view']['static']['minsize'] = 2048;
+$profile['view']['static']['exts'] = ['css', 'js','png', 'jpg', 'gif'];
 
 /**
  * 自动加载类配置
@@ -788,4 +734,129 @@ $profile['autoloader']['namespaces'] = [
 ];
 $profile['autoloader']['classes'] = [];
 $profile['autoloader']['is_realpath'] = false;
+
+/**
+ * 模块管理
+ * 
+ * module.enabled 是否开启模块
+ *      true 开启| false 关闭
+ *  
+ * module.event_listener 
+ *      监听beginRequest事件的模块管理器
+ *      
+ * module.path 模块搜索并自动加载的目录
+ *      string 单个路径
+ *      array  多个搜索路径
+ *      
+ * module.disabled_modules 禁止加载的模块列表
+ *      array 多个禁止的模块名
+ *      
+ * module.default 默认的模块名
+ *      null 没有模块
+ * 
+ * module.param 默认的动态请求传递模块名的参数
+ *      string 模块名
+ * 
+ */
+$profile['module']['enabled'] = true;
+$profile['module']['event_listener'] = \Tiny\MVC\Module\ModuleManager::class;
+$profile['module']['path'] = ['{app}modules/', '{app}../vendor/tinyphporg'];
+$profile['module']['disabled_modules'] = [];
+$profile['module']['activated_modules'] = [];
+$profile['module']['default'] = '';
+$profile['module']['param'] = 'm';
+
+/**
+ * 模块的静态公共资源配置
+ * 
+ * module.static.enabled 是否开启静态资源的自动复制
+ *      true 开启
+ * 
+ *  module.static.web WEB环境下是否自动开启静态资源复制
+ *      true 开启  会影响web下的某些性能
+ *          
+ */
+$profile['module']['static']['enabled'] = true;
+$profile['module']['static']['web'] = true;
+
+/**
+ * tinyphp-ui 前端库设置
+ *
+ * module.tinyphp-ui.enabled 开启
+ *      true 开启前确认是否通过composer/框架加载，引入了tinyphporg/tinyphp-ui模块
+ *
+ * module.tinyphp-ui.public_path 在前端源码展示的公共路径
+ *      根目录下的绝对路径 /tinyphp-ui
+ *      包含域名的绝对路径 demo.xxx.com/tinyphp-ui/
+ *
+ *  module.tinyphp-ui.inject
+ *      是否自动将ui库的公共路径，注入到html源码
+ *      仅支持engine = template时
+ *
+ *  module.tinyphp-ui.helper
+ *      ui前端库在view注册的助手类
+ *      message 提示消息体
+ *      pagination 分页
+ *
+ * module.tinyphp-ui.template_dirname
+ *      UI库的视图模板路径
+ *
+ *  module.tinyphp-ui.dev_enabled 是否开启UI调试
+ *      必须在tinyphp-ui 运行npm run dev后开启调试模式
+ *
+ *  module.tinyphp-ui.dev_public_path
+ *      调试库在前端展现的URL  相对于view.public_path的路径
+ *
+ *  module.tinyphp-ui.dev_event_listener
+ *      开启调试后的监听事件类
+ */
+$profile['module']['tinyphp-ui']['enabled'] = true;
+$profile['module']['tinyphp-ui']['public_path'] = '/static/tinyphp-ui/';
+$profile['module']['tinyphp-ui']['inject'] = true;
+
+// UI前端模块的开发设置
+$profile['module']['tinyphp-ui']['dev']['enabled'] = true;
+$profile['module']['tinyphp-ui']['dev']['public_path'] = "http://127.0.0.1:8080/js/tinyphp-ui.js";
+$profile['module']['tinyphp-ui']['dev']['admin_public_path'] = "http://127.0.0.1:8080/js/tinyphp-ui.admin.js";
+
+/**
+ * 需要做路径处理的路径节点列表
+ *      [propertis.nodename...]
+ *      作为路径传递的配置节点名，在相对路径前添加application_path的绝对路径，并替换src里的标签,./,../,相对路径等。
+ */
+$profile['path'] = [
+    'src.path',
+    'src.public',
+    'src.static',
+    'src.runtime',
+    'src.resources',
+    'src.tmp',
+    'src.vendor',
+    'builder.path',
+    'builder.profile_path',
+    'builder.config_path',
+    'config.path',
+    'lang.path',
+    'log.path',
+    'cache.dir',
+    'view.basedir',
+    'view.cache.dir',
+    'view.compile',
+    'view.config',
+    'view.path',
+    'module.tinyphp-ui.template_dirname',
+    'view.static.basedir',
+    'src.library',
+    'src.global',
+    'src.controller',
+    'src.console',
+    'src.rpc',
+    'src.model',
+    'src.common',
+    'src.event',
+    'daemon.piddir',
+    'daemon.logdir',
+    'container.provider_path',
+    'module.path',
+];
 ?>

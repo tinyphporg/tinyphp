@@ -9,8 +9,9 @@
 .DS_Store
 *.phar
 runtime/view/*
+runtime/cache/*
 application/runtime/view/*
 public/setting
 public/profile
-public/tinyphp-ui
+public/static/*
 composer.lock

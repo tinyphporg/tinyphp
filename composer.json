@@ -6,16 +6,16 @@
     "require": {
         "php": ">= 7.3.0",
         "tinyphporg/tinyphp-framework": ">= 2.0.0",
-        "tinyphporg/tinyphp-ui": ">= 2.0.0"
+        "tinyphporg/tinyphp-ui": ">= 2.0.0",
+        "tinyphporg/tinyphp-demo" : ">=2.0.0"
     },
     "license": "Apache-2.0",
     "version": "2.0.0",
     "author": {
-        "name": "tinycn",
-        "email": "tinycn@qq.com"
+        "name": "Da.Jin",
+        "email": "da.jin@tinyphp.org"
     },
     "scripts": {
-        "post-update-cmd": "php ./public/index.php  --ui-install"
     },
     "autoload": {
     }
