@@ -1,82 +1,74 @@
-tinyphp
+TinyPHP Framework for PHP
 ====
 
-# tinyphp: 面向全栈PHP工程师的高性能MVC框架。
-	+ Version: 2.0.0
-	+ 框架地址: [tinyphp framework for php](https://github.com/tinyphporg/tinyphp-framework)
-+ 经过日PV十亿级别生产环境检验；  
-+ 可应用于分布式的、高并发的生成环境；
-+ 支持分布式的RPC微服务处理；    
-+ 适用于 Web/Console/RPC等运行环境，包括单一命令行文件打包，多任务的服务端守护进等。   
-
+tinyphp v2.0.0
+----
++ 面向全栈PHP工程师的高性能MVC框架。
++ 基于tinyphp framework v2.0.0 [https://github.com/tinyphporg/tinyphp-framework](https://github.com/tinyphporg/tinyphp-framework)
+```   
+经过日PV十亿级别生产环境检验；  
+应用于高并发高性能的生产环境；
+支持分布式的RPC微服务处理；    
+适用于 Web/Console/RPC等运行环境，包括单一命令行文件打包，多任务的服务端守护进等。   
+```
 快速开始
 ----
 ```shell
 composer create-project tinyphporg/tinyphp
 
-#console运行
+#console 运行
 php public/index.php
 
-#单文件编译
+#编译单文件
 php public/index.php --build
 
-#开启服务端守护进程
-php public/index.php -d
+#服务端守护进程
+php public/index.php -d  //开启
+php public/index.php --daemon=stop  //关闭
 
-#curl 127.0.0.1
-
-#配置文件 application/config/profile.php
+#配置文件 
+application/config/profile.php
 ``` 
 核心组件
 ====
 
-### tinyphp-framwork   
-
-> 项目地址：   [https://github.com/tinyphporg/tinyphp-framework](https://github.com/tinyphporg/tinyphp-framework)    
+### tinyphp-framwork v2.0 
++ 框架地址：   [https://github.com/tinyphporg/tinyphp-framework](https://github.com/tinyphporg/tinyphp-framework)    
 
 ### tinyphp-docs
-> 中文文档: 使用手册、标准库。  
-> 项目地址: [https://github.com//tinyphp-docs](https://github.com/tinyphporg/tinyphp-docs)   
++ 中文文档: 使用手册、标准库。  
++ 项目地址: [https://github.com//tinyphp-docs](https://github.com/tinyphporg/tinyphp-docs)   
 
 ### tinyphp-ui  
-> 前端UI组件库: webpack5+bootstrap5+jquery...     
-> 项目地址： : [https://github.com/tinyphporg/tinyphp-ui](https://github.com/tinyphporg/tinyphp-ui)  
++ 前端UI组件库: webpack5+bootstrap5+jquery...     
++ 项目地址： : [https://github.com/tinyphporg/tinyphp-ui](https://github.com/tinyphporg/tinyphp-ui)  
 
 ### lnmp-utils   
-> Linux(CentOS7X_64) +openresty(nginx)+Mysql+PHP+Redis一键安装包。    
-> 项目地址: https://github.com/tinyphporg/lnmp-utils
++ Linux(CentOS7X_64) +openresty(nginx)+Mysql+PHP+Redis一键安装包。    
++ 项目地址: https://github.com/tinyphporg/lnmp-utils
 
-运行环境
+快速构建运行环境
 ----
 
-### centos
+### CentOS X64 7.4+
 > 适应于生产环境，依赖于lnmp-utils。   
 > lnmp-utils: Linux(CentOS7X_64) +openresty(nginx)+Mysql+PHP+Redis一键安装包。    
 > 项目地址: https://github.com/tinyphporg/lnmp-utils    
 
 ```shell
-
 git clone https://github.com/tinyphporg/lnmp-utils.git
 cd ./lnmp-utils
-./install.sh 
-cd /data/web/tinyphporg/tinyphp
-#console 
-php public/index
-#url
-http://127.0.0.1/
-
+./install.sh -m tinyphp
 ```
 
 ### docker
 >  适应于开发环境
 
 ```shell
-
 #可更改/data/workspace/tinyphp为自定义IDE工作目录
 workspace=/data/workspace/
 
 docker pull centos:7
-
 docker run -d -p 80:80 -p 3306:3306 -p 8080:8080 -p 8989:8989 -p 10022:22 -v $workspace:/data/web  --name="tinyphp" --hostname="tinyphp" --restart=always -w /data/worksapce/ centos:7 /sbin/init
 
 #port 8080 
