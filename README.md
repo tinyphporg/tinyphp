@@ -5,11 +5,11 @@ tinyphp v2.0.0
 ----
 + 面向全栈PHP工程师的高性能MVC框架。
 + 基于tinyphp framework v2.0.0 [https://github.com/tinyphporg/tinyphp-framework](https://github.com/tinyphporg/tinyphp-framework)
-```   
-经过日PV十亿级别生产环境检验；  
-应用于高并发高性能的生产环境；
-支持分布式的RPC微服务处理；    
-适用于 Web/Console/RPC等运行环境，包括单一命令行文件打包，多任务的服务端守护进等。   
+  
+> 经过日PV十亿级别生产环境检验；  
+> 应用于高并发高性能的生产环境；
+> 支持分布式的RPC微服务处理；    
+> 适用于 Web/Console/RPC等运行环境，包括单一命令行文件打包，多任务的服务端守护进等。   
 ```
 快速开始
 ----
