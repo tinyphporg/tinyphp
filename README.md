@@ -1,11 +1,12 @@
 tinyphp
 ====
 
-基于[tinyphp framework for php](https://github.com/tinyphporg/tinyphp-framework)搭建的开发DEMO   
-+ 经过日PV十亿级别生产环境检验的 MVC Frameworks FOR PHP；  
-+ 应用于分布式的、高并发的生成环境；
-+ 适应于多人团队协作;    
-+  支持多环境和分布式处理；    
+# tinyphp: 面向全栈PHP工程师的高性能MVC框架。
+	+ Version: 2.0.0
+	+ 框架地址: [tinyphp framework for php](https://github.com/tinyphporg/tinyphp-framework)
++ 经过日PV十亿级别生产环境检验；  
++ 可应用于分布式的、高并发的生成环境；
++ 支持分布式的RPC微服务处理；    
 + 适用于 Web/Console/RPC等运行环境，包括单一命令行文件打包，多任务的服务端守护进等。   
 
 快速开始

@@ -13,7 +13,6 @@
  */
 namespace App\Controller\Console;
 
-use App\Model\Main\UserInfo;
 use Tiny\Lang\Lang;
 use Tiny\Config\Configuration;
 use Tiny\MVC\Application\ApplicationBase;
@@ -29,15 +28,6 @@ use Tiny\MVC\Application\ConsoleApplication;
 */
 class Main extends \Tiny\MVC\Controller\ConsoleController
 {
-    
-    /**
-     *
-     * @autowire 实例化时自动加载
-     *
-     * @var UserInfo
-     */
-    protected UserInfo $userinfo;
-    
     /**
      * 当前应用实例
      * 
@@ -59,7 +49,7 @@ class Main extends \Tiny\MVC\Controller\ConsoleController
     public function testAction()
     {
         echo "console test";
-        sleep(20000);
+        sleep(2);
     }
     
     /**
@@ -76,24 +66,21 @@ class Main extends \Tiny\MVC\Controller\ConsoleController
     /**
      * 测试首页
      * 
-     * @param UserInfo $userinfo 
      * @param Lang $lang
      * @param Configuration $config
      */
-    public function indexAction(UserInfo $userinfo, Lang $lang, Configuration $config)
+    public function indexAction(Lang $lang, Configuration $config)
     {
         $actionName = $this->request->getActionName();
         $controllerName = $this->request->getControllerName();   
         $isName = $this->request->param->isRequired('name') ? 'true' : 'false';
         $name = $this->request->param['name'];
-        $userInfos = $userinfo->getUsers();
         $output = [
             'actionName' => $actionName,
             'controllerName' => $controllerName,
             'name' => $name,
             'defName' => 'tinyphp',
             'isName' => $isName,
-            'users' => $userInfos,
         ];
         $this->response->outFormatJSON(0, $config['example.default.b'], $output);
     }

@@ -1,6 +1,6 @@
 <?php
  return array (
-  'expriation' => 1657169062,
+  'expriation' => 1657265934,
   'value' => 
   array (
     'application.module' => 
@@ -14,6 +14,12 @@
           'desc' => 'tinyphp的demo模块',
           'type' => 'module',
           'version' => '1.0.0',
+          'init' => true,
+          'index' => './src',
+          'setting' => 
+          array (
+            'public_path' => '/static/tinyphp-demo/',
+          ),
           'routes' => 
           array (
             0 => 
@@ -30,36 +36,50 @@
           ),
           'autoloader' => 
           array (
+            'ignores' => 
+            array (
+            ),
             'global' => './librarys/global/',
             'namespaces' => 
             array (
               'Demo' => './librarys/',
+              'Demo\\Common' => './librarys/common/',
+            ),
+            'static' => 
+            array (
+              'web' => true,
+              'paths' => 
+              array (
+              ),
             ),
           ),
           'config' => true,
           'lang' => true,
-          'init' => true,
           'eventlistener' => 
           array (
-            0 => 'Demo\\Event\\Bootstrap',
+            0 => 
+            array (
+              'class' => 'Demo\\Event\\Bootstrap',
+              'priority' => 0,
+            ),
           ),
           'require' => 
           array (
-          ),
-          'setting' => 
-          array (
-            'public_path' => '/static/tinyphp-demo/',
           ),
         ),
         'desc' => 'tinyphp的demo模块',
         'disabled' => false,
         'name' => 'tinyphp-demo',
-        'basedir' => '/data/workspace/tinyphp/application/modules/tinyphp-demo/',
-        'index' => '',
+        'basedir' => '/data/workspace/tinyphp/vendor/tinyphporg/tinyphp-demo/',
+        'index' => './src',
         'namespace' => 'Demo',
         'eventlistener' => 
         array (
-          0 => 'Demo\\Event\\Bootstrap',
+          0 => 
+          array (
+            'class' => 'Demo\\Event\\Bootstrap',
+            'priority' => 0,
+          ),
         ),
         'version' => '1.0.0',
         'init' => true,
@@ -90,30 +110,30 @@
         ),
         'parsedPaths' => 
         array (
-          'module.tinyphp-demo.config' => '/data/workspace/tinyphp/application/modules/tinyphp-demo/config/',
-          'module.tinyphp-demo.lang' => '/data/workspace/tinyphp/application/modules/tinyphp-demo/lang/',
-          'module.tinyphp-demo.controller' => '/data/workspace/tinyphp/application/modules/tinyphp-demo/controllers/web/',
-          'module.tinyphp-demo.controller_console' => '/data/workspace/tinyphp/application/modules/tinyphp-demo/controllers/console/',
-          'module.tinyphp-demo.model' => '/data/workspace/tinyphp/application/modules/tinyphp-demo/models/',
-          'module.tinyphp-demo.event' => '/data/workspace/tinyphp/application/modules/tinyphp-demo/events/',
-          'module.tinyphp-demo.view' => '/data/workspace/tinyphp/application/modules/tinyphp-demo/views/',
-          'module.tinyphp-demo.library' => '/data/workspace/tinyphp/application/modules/tinyphp-demo/librarys/',
-          'module.tinyphp-demo.global' => '/data/workspace/tinyphp/application/modules/tinyphp-demo//librarys/global',
+          'module.tinyphp-demo.config' => '/data/workspace/tinyphp/vendor/tinyphporg/tinyphp-demo/src/config/',
+          'module.tinyphp-demo.lang' => '/data/workspace/tinyphp/vendor/tinyphporg/tinyphp-demo/src/lang/',
+          'module.tinyphp-demo.controller' => '/data/workspace/tinyphp/vendor/tinyphporg/tinyphp-demo/src/controllers/web/',
+          'module.tinyphp-demo.controller_console' => '/data/workspace/tinyphp/vendor/tinyphporg/tinyphp-demo/src/controllers/console/',
+          'module.tinyphp-demo.model' => '/data/workspace/tinyphp/vendor/tinyphporg/tinyphp-demo/src/models/',
+          'module.tinyphp-demo.event' => '/data/workspace/tinyphp/vendor/tinyphporg/tinyphp-demo/src/events/',
+          'module.tinyphp-demo.view' => '/data/workspace/tinyphp/vendor/tinyphporg/tinyphp-demo/src/views/',
+          'module.tinyphp-demo.library' => '/data/workspace/tinyphp/vendor/tinyphporg/tinyphp-demo/src/librarys/',
+          'module.tinyphp-demo.global' => '/data/workspace/tinyphp/vendor/tinyphporg/tinyphp-demo/src//librarys/global',
         ),
         'path' => 
         array (
-          'config' => '/data/workspace/tinyphp/application/modules/tinyphp-demo/config/',
-          'lang' => '/data/workspace/tinyphp/application/modules/tinyphp-demo/lang/',
-          'controller' => '/data/workspace/tinyphp/application/modules/tinyphp-demo/controllers/web/',
-          'controller_console' => '/data/workspace/tinyphp/application/modules/tinyphp-demo/controllers/console/',
-          'model' => '/data/workspace/tinyphp/application/modules/tinyphp-demo/models/',
-          'event' => '/data/workspace/tinyphp/application/modules/tinyphp-demo/events/',
-          'view' => '/data/workspace/tinyphp/application/modules/tinyphp-demo/views/',
-          'library' => '/data/workspace/tinyphp/application/modules/tinyphp-demo/librarys/',
-          'global' => '/data/workspace/tinyphp/application/modules/tinyphp-demo//librarys/global',
-          'profile' => '/data/workspace/tinyphp/application/modules/tinyphp-demo/',
-          'basedir' => '/data/workspace/tinyphp/application/modules/tinyphp-demo/',
-          'indexdir' => '/data/workspace/tinyphp/application/modules/tinyphp-demo/',
+          'config' => '/data/workspace/tinyphp/vendor/tinyphporg/tinyphp-demo/src/config/',
+          'lang' => '/data/workspace/tinyphp/vendor/tinyphporg/tinyphp-demo/src/lang/',
+          'controller' => '/data/workspace/tinyphp/vendor/tinyphporg/tinyphp-demo/src/controllers/web/',
+          'controller_console' => '/data/workspace/tinyphp/vendor/tinyphporg/tinyphp-demo/src/controllers/console/',
+          'model' => '/data/workspace/tinyphp/vendor/tinyphporg/tinyphp-demo/src/models/',
+          'event' => '/data/workspace/tinyphp/vendor/tinyphporg/tinyphp-demo/src/events/',
+          'view' => '/data/workspace/tinyphp/vendor/tinyphporg/tinyphp-demo/src/views/',
+          'library' => '/data/workspace/tinyphp/vendor/tinyphporg/tinyphp-demo/src/librarys/',
+          'global' => '/data/workspace/tinyphp/vendor/tinyphporg/tinyphp-demo/src//librarys/global',
+          'profile' => '/data/workspace/tinyphp/vendor/tinyphporg/tinyphp-demo/',
+          'basedir' => '/data/workspace/tinyphp/vendor/tinyphporg/tinyphp-demo/',
+          'indexdir' => '/data/workspace/tinyphp/vendor/tinyphporg/tinyphp-demo/src/',
         ),
         'config' => 
         array (
@@ -148,12 +168,13 @@
         'controllerNamespace' => 'Demo\\Controller',
         'namespaces' => 
         array (
-          'Demo' => '/data/workspace/tinyphp/application/modules/tinyphp-demo/librarys/',
-          'Demo\\Controller' => '/data/workspace/tinyphp/application/modules/tinyphp-demo/controllers/web/',
-          'Demo\\Controller\\Console' => '/data/workspace/tinyphp/application/modules/tinyphp-demo/controllers/console/',
-          'Demo\\Model' => '/data/workspace/tinyphp/application/modules/tinyphp-demo/models/',
-          'Demo\\Event' => '/data/workspace/tinyphp/application/modules/tinyphp-demo/events/',
-          '*' => '/data/workspace/tinyphp/application/modules/tinyphp-demo/librarys/global/',
+          'Demo' => '/data/workspace/tinyphp/vendor/tinyphporg/tinyphp-demo/src/librarys/',
+          'Demo\\Controller' => '/data/workspace/tinyphp/vendor/tinyphporg/tinyphp-demo/src/controllers/web/',
+          'Demo\\Controller\\Console' => '/data/workspace/tinyphp/vendor/tinyphporg/tinyphp-demo/src/controllers/console/',
+          'Demo\\Model' => '/data/workspace/tinyphp/vendor/tinyphporg/tinyphp-demo/src/models/',
+          'Demo\\Event' => '/data/workspace/tinyphp/vendor/tinyphporg/tinyphp-demo/src/events/',
+          'Demo\\Common' => '/data/workspace/tinyphp/vendor/tinyphporg/tinyphp-demo/src/librarys/common/',
+          '*' => '/data/workspace/tinyphp/vendor/tinyphporg/tinyphp-demo/src/librarys/global/',
         ),
         'static' => 
         array (
@@ -213,6 +234,7 @@
           ),
           'autoloader' => 
           array (
+            'global' => NULL,
             'ignores' => 
             array (
               0 => 'Tiny\\UI\\Template\\UIViewTemplatePlugin',
@@ -248,14 +270,6 @@
           ),
           'require' => 
           array (
-          ),
-          'install' => 
-          array (
-            'auto' => true,
-            'web' => false,
-            'db' => 
-            array (
-            ),
           ),
         ),
         'desc' => 'tinyphp前端UI库',
@@ -330,28 +344,6 @@
         ),
         'config' => 
         array (
-          'profile' => 
-          array (
-            'enabled' => false,
-            'public_path' => '/static/tinyphp-ui/',
-            'inject' => true,
-            'template_plugin' => 'Tiny\\MVC\\View\\UI\\Template\\UIViewTemplatePlugin',
-            'helper' => 'Tiny\\MVC\\View\\UI\\Helper\\UIViewHelper',
-            'template_dirname' => '{vendor}/tinyphporg/tinyphp-ui/templates/',
-            'dev' => 
-            array (
-              'enabled' => true,
-              'public_path' => 'http://127.0.0.1:8080/js/tinyphp-ui.js',
-              'admin_public_path' => 'http://127.0.0.1:8080/js/tinyphp-ui.admin.js',
-              'event_listener' => 'Tiny\\MVC\\View\\UI\\EventListener\\UIDebugEventListener',
-            ),
-            'installer' => 
-            array (
-              'param_name' => 'ui-install',
-              'install_path' => 'tinyphp-ui/',
-              'event_listener' => 'Tiny\\MVC\\View\\UI\\EventListener\\UIInstallerEventListener',
-            ),
-          ),
           'ui' => 
           array (
             'name' => 'system',
@@ -365,7 +357,7 @@
           'Tiny\\UI\\Controller\\Console' => '/data/workspace/tinyphp/vendor/tinyphporg/tinyphp-ui/src/controllers/console/',
           'Tiny\\UI\\Model' => '/data/workspace/tinyphp/vendor/tinyphporg/tinyphp-ui/src/models/',
           'Tiny\\UI\\Event' => '/data/workspace/tinyphp/vendor/tinyphporg/tinyphp-ui/src/events/',
-          'Tiny\\UI\\A' => '/data/workspace/tinyphp/vendor/tinyphporg/tinyphp-ui/libs/UI/',
+          'Tiny\\UI\\A' => '/data/workspace/tinyphp/vendor/tinyphporg/tinyphp-ui/src/libs/UI/',
           '*' => '/data/workspace/tinyphp/vendor/tinyphporg/tinyphp-ui/src/librarys/global/',
         ),
         'static' => 
@@ -489,6 +481,23 @@
                   array (
                     'runmax' => 1024,
                     'tick' => '10',
+                  ),
+                ),
+                1 => 
+                array (
+                  'id' => 'test',
+                  'worker' => 'worker',
+                  'dispatcher' => 
+                  array (
+                    'controller' => 'main',
+                    'action' => 'test',
+                    'module' => '',
+                  ),
+                  'num' => 1,
+                  'options' => 
+                  array (
+                    'runmax' => 1024,
+                    'tick' => '1',
                   ),
                 ),
               ),
@@ -649,11 +658,8 @@
               ),
             ),
           ),
-          'application' => 
-          array (
-            'storager' => 'Tiny\\Cache\\Storager\\SingleCache',
-            'ttl' => 60,
-          ),
+          'application_storager' => 'Tiny\\Cache\\Storager\\SingleCache',
+          'application_ttl' => 60,
         ),
         'filter' => 
         array (
@@ -891,6 +897,59 @@
           'size' => 11543,
           'mtime' => 1656833697,
           'path' => '/data/workspace/tinyphp/vendor/tinyphporg/tinyphp-ui/src/views/debug/web.htm',
+        ),
+      ),
+      'tinyphp-demo' => 
+      array (
+        'test/index.htm' => 
+        array (
+          'dirname' => '/data/workspace/tinyphp/vendor/tinyphporg/tinyphp-demo/src/views/test',
+          'basename' => 'index.htm',
+          'extension' => 'htm',
+          'filename' => 'index',
+          'size' => 1929,
+          'mtime' => 1657187246,
+          'path' => '/data/workspace/tinyphp/vendor/tinyphporg/tinyphp-demo/src/views/test/index.htm',
+        ),
+        'test/header.htm' => 
+        array (
+          'dirname' => '/data/workspace/tinyphp/vendor/tinyphporg/tinyphp-demo/src/views/test',
+          'basename' => 'header.htm',
+          'extension' => 'htm',
+          'filename' => 'header',
+          'size' => 148,
+          'mtime' => 1657187246,
+          'path' => '/data/workspace/tinyphp/vendor/tinyphporg/tinyphp-demo/src/views/test/header.htm',
+        ),
+        'test/index.js' => 
+        array (
+          'dirname' => '/data/workspace/tinyphp/vendor/tinyphporg/tinyphp-demo/src/views/test',
+          'basename' => 'index.js',
+          'extension' => 'js',
+          'filename' => 'index',
+          'size' => 82,
+          'mtime' => 1657187246,
+          'path' => '/data/workspace/tinyphp/vendor/tinyphporg/tinyphp-demo/src/views/test/index.js',
+        ),
+        'test/index.php' => 
+        array (
+          'dirname' => '/data/workspace/tinyphp/vendor/tinyphporg/tinyphp-demo/src/views/test',
+          'basename' => 'index.php',
+          'extension' => 'php',
+          'filename' => 'index',
+          'size' => 462,
+          'mtime' => 1657187246,
+          'path' => '/data/workspace/tinyphp/vendor/tinyphporg/tinyphp-demo/src/views/test/index.php',
+        ),
+        'test/README.md' => 
+        array (
+          'dirname' => '/data/workspace/tinyphp/vendor/tinyphporg/tinyphp-demo/src/views/test',
+          'basename' => 'README.md',
+          'extension' => 'md',
+          'filename' => 'README',
+          'size' => 1076,
+          'mtime' => 1657187246,
+          'path' => '/data/workspace/tinyphp/vendor/tinyphporg/tinyphp-demo/src/views/test/README.md',
         ),
       ),
     ),

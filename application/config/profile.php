@@ -248,7 +248,7 @@ $profile['daemon']['daemons'] = [
     'tinyphp-daemon' => [
         'workers' => [
            ['id' => 'index', 'type' => 'worker' , 'dispatcher' => ['controller' => 'main', 'action' => 'index', "module" => ''], 'num' => 1, 'options' => ['runmax' => 1024, 'tick' => '10']],
-    //        ['id' => 'test', 'worker' => 'worker' , 'dispatcher' => ['controller' => 'user', 'action' => 'login', 'module' => 'opensaas'], 'num' => 1, 'options' => ['runmax' => 1024, 'tick' => '1']]
+           ['id' => 'test', 'worker' => 'worker' , 'dispatcher' => ['controller' => 'main', 'action' => 'test', 'module' => ''], 'num' => 1, 'options' => ['runmax' => 1024, 'tick' => '1']]
         ],
         'options' => [],
     ],
@@ -440,8 +440,8 @@ $profile['cache']['sources'] = [
  *      int 60
  * 
  */
-$profile['cache']['application']['storager'] = SingleCache::class;
-$profile['cache']['application']['ttl'] = 60;
+$profile['cache']['application_storager'] = SingleCache::class;
+$profile['cache']['application_ttl'] = 60;
 /**
  * application的过滤器配置
  * 
