@@ -3,7 +3,7 @@ TinyPHP Framework for PHP
 
 tinyphp v2.0.0
 ----
-+ 面向全栈PHP工程师的高性能MVC框架。
+
 + 基于tinyphp framework v2.0.0 [https://github.com/tinyphporg/tinyphp-framework](https://github.com/tinyphporg/tinyphp-framework)
   
 > 经过日PV十亿级别生产环境检验；  
@@ -11,6 +11,21 @@ tinyphp v2.0.0
 > 支持分布式的RPC微服务处理；    
 > 适用于 Web/Console/RPC等运行环境，包括单一命令行文件打包，多任务的服务端守护进等。   
 
+tinyphp的适用场景与理念
+---- 
+* 客户端应用(IOS/Android/H5/小程序)的API接口开发：
+    * 高性能，大并发。
+    * 快速开发
+    
+*  Web管理后台：
+    * 适用于全栈或不具备设计工程师和前端工程师的研发团队。
+    * 集成了tinyphp-ui前端框架，只需少量的JS前端代码。 
+    
+* 大规模团队协作：
+    * 10-100+人以上的研发团队。
+    * 创业团队，产品快速成型，可在较少的研发人力成本下进行高效的敏捷开发。
+    * 适用于具备在大规模的高性能应用场景下，通过PHP解决大多数复杂业务的架构。
+    * 可将大规模复杂应用的后端语言有效控制为PHP一种后端开发语言，有效降低项目维护成本和团队管理难度。
 快速开始
 ----
 ```shell
