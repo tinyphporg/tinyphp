@@ -11,7 +11,7 @@ tinyphp v2.0.0
 > 支持分布式的RPC微服务处理；    
 > 适用于 Web/Console/RPC等运行环境，包括单一命令行文件打包，多任务的服务端守护进等。   
 
-tinyphp的适用场景与理念
+tinyphp-framework的适用场景与理念
 ---- 
 * 客户端应用(IOS/Android/H5/小程序)的API接口开发：
     * 高性能，大并发。
