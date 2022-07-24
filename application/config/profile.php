@@ -229,7 +229,7 @@ $profile['builder']['profile_path'] = 'build/profile';
  *      workers的配置: 【
  *          id => worker的身份标识
  *          type => worker worker类型，默认为限定循环执行的子进程模式
- *          dispatcher => 代理执行worker进程的控制器和动作参数
+ *          dispatcher => [controller,action,module]代理执行worker进程的控制器,动作参数, 模块
  *          num => 子进程的数量
  *          options => [] 附加给worker实例的参数
  *              type = worker: 
@@ -314,25 +314,23 @@ $profile['log']['path'] = '{runtime}/log/';
  *  data.enabled 开启数据资源池
  *      true 开启|false 关闭
  *  
- *  data.charset 数据库默认连接编码
- *      utf8 默认utf8
- *      false 无需自动设置编码
- *      utf8mb4 兼容表情包
- *  
  *   data.default_id 默认ID
  *      默认调用datasource的ID
  *  
  *  data.drivers 驱动数组
  *  
  *  data.sources 数据资源池配置   
+ *       mysql驱动
  *      driver = db.mysqli|db.pdo| [
  *          id => 调用时使用的ID字段
  *          host 通用的远程资源
  *          prot 通用的远程端口
+ *          charset utf8mb4 兼容表情包
  *          password 通用密码
  *          dbname 数据库名称
  *      ]
  *      
+ *      redis驱动
  *      driver = redis [
  *          id => 调用时使用的ID字段
  *          host => 远程host 单独设置的host & prot 会合并到servers内
@@ -341,13 +339,14 @@ $profile['log']['path'] = '{runtime}/log/';
  *          servers => [[host => 服务, port => 端口]]  
  *      ]
  *      
+ *      memcache驱动
  *      driver = memcached [
  *          servers => [[host=> 服务地址, port=> 端口]]
  *          persistent_id => 共享实例的ID
  *          options => [选项]
  *      ]
  */
-$profile['data']['enabled'] = true;    /* 是否开启数据池 */
+$profile['data']['enabled'] = true;
 $profile['data']['charset'] = 'utf8';
 $profile['data']['default_id'] = 'default';
 $profile['data']['drivers'] = [];
@@ -442,6 +441,8 @@ $profile['cache']['sources'] = [
  */
 $profile['cache']['application_storager'] = SingleCache::class;
 $profile['cache']['application_ttl'] = 60;
+
+
 /**
  * application的过滤器配置
  * 
@@ -480,6 +481,10 @@ $profile['filter']['filters'] = [];
  *  session.expires 
  *      SESSION过期时间
  *  
+ *  session.adapters 添加自定义的SESSION适配器
+ *      adapterid 适配器ID
+ *      adapterClass 实现了session适配器接口的自定义session adapter class
+ *      
  *  session.adapter SESSION适配器
  *      redis 以datasource的redis实例作为session适配器
  *      memcache 以datasource的rmemcached实例作为session适配器
@@ -492,8 +497,9 @@ $profile['session']['enabled'] = true;
 $profile['session']['domain'] = '';
 $profile['session']['path'] = '/';
 $profile['session']['expires'] = 36000;
+$profile['session']['adapters'] = [];
 $profile['session']['adapter'] = 'redis';
-$profile['session']['dataid'] = 'redis';
+$profile['session']['dataid'] = 'redis_session';
 
 /**
  * HTTP COOKIE设置
@@ -539,15 +545,6 @@ $profile['bootstrap']['enabled'] = true;
 $profile['bootstrap']['event_listener'] = \App\Event\Bootstrap::class;
 
 /**
- * Application的响应实例配置
- *      
- * response.formatJsonConfigId     
- *    response格式化输出JSON 默认指定的语言包配置节点名
- *    status => $this->lang['status'];
- */
-$profile['response']['formatJsonConfigId'] = 'status';
-
-/**
  * Application的路由设置
  * 
  * router.enabled 开启路由
@@ -574,6 +571,14 @@ $profile['router']['rules'] = [
     ['route' => 'pathinfo', 'rule' => ['ext' => '.html' , 'domain' => '*']],
 ];
 
+/**
+ * Application的响应实例配置
+ *
+ * response.formatJsonConfigId
+ *    response格式化输出JSON 默认指定的语言包配置节点名
+ *    status => $this->lang['status'];
+ */
+$profile['response']['formatJsonConfigId'] = 'status';
 
 /**
  * Application的控制器配置

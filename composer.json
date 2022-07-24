@@ -1,6 +1,6 @@
 {
     "name": "tinyphporg/tinyphp",
-    "description": "Scaffold for tinyphp-framework.",
+    "description": "A lightweight PHP MVC framework for Full Stack Developer/一款面向PHP全栈工程师的轻量级高性能MVC PHP框架。",
     "type": "project",
     "minimum-stability": "stable",
     "require": {
