@@ -353,9 +353,9 @@ $profile['data']['drivers'] = [];
 $profile['data']['sources'] = [
     ['id' => 'default', 'driver' => 'db.mysqli', 'host' => '127.0.0.1', 'port' => '3306', 'user' => 'root', 'password' => '123456', 'dbname' => 'mysql'],
     ['id' => 'redis', 'driver' => 'redis', 'host' => '127.0.0.1', 'port' => '6379', 'db' => 0],
-    ['id' => 'redis_cache', 'driver' => 'redis', 'servers' => [['host' => '127.0.0.1', 'port' => '6379']]],
-	['id' => 'redis_session', 'driver' => 'redis', 'host' => '127.0.0.1', 'port' => '6379'],
-    ['id' => 'redis_queue', 'driver' => 'redis', 'host' => '127.0.0.1', 'port' => '6379'],
+    ['id' => 'redis_cache', 'driver' => 'redis', 'db' => 1, 'servers' => [['host' => '127.0.0.1', 'port' => '6379']]],
+    ['id' => 'redis_session', 'driver' => 'redis', 'db' => 2, 'host' => '127.0.0.1', 'port' => '6379'],
+    ['id' => 'redis_queue', 'driver' => 'redis', 'db' => 3, 'host' => '127.0.0.1', 'port' => '6379'],
     ['id' => 'memcached', 'driver' => 'memcached', 'servers' => [['host' => '127.0.0.1', 'port' => '11211']], 'persistent_id' => null, 'options' => []]
 ];
 
@@ -568,7 +568,9 @@ $profile['bootstrap']['event_listener'] = \App\Event\Bootstrap::class;
 $profile['router']['enabled'] = true;  // 是否开启router
 $profile['router']['routes'] = [];     // 注册自定义的route
 $profile['router']['rules'] = [
-    ['route' => 'pathinfo', 'rule' => ['ext' => '.html' , 'domain' => '*']],
+    ['route' => 'pathinfo', 'rule' => ['ext' => '.html' , 'domain' => '*.tinyphp1', 'priority' => 0]],
+    ['route' => 'pathinfo', 'rule' => ['ext' => '.html' , 'domain' => '*', 'priority' => 0]],
+    ['route' => 'pathinfo', 'rule' => ['ext' => '.html' , 'domain' => '*.tinyphp', 'priority' => 0]],
 ];
 
 /**
@@ -752,7 +754,10 @@ $profile['autoloader']['is_realpath'] = false;
  * module.path 模块搜索并自动加载的目录
  *      string 单个路径
  *      array  多个搜索路径
- *      
+ * 
+ * module.cache 
+ *      true|false 是否缓存模块的加载数据
+ * 
  * module.disabled_modules 禁止加载的模块列表
  *      array 多个禁止的模块名
  *      
@@ -766,8 +771,9 @@ $profile['autoloader']['is_realpath'] = false;
 $profile['module']['enabled'] = true;
 $profile['module']['event_listener'] = \Tiny\MVC\Module\ModuleManager::class;
 $profile['module']['path'] = ['{app}modules/', '{app}../vendor/tinyphporg'];
+$profile['module']['cache'] = true;
 $profile['module']['disabled_modules'] = [];
-$profile['module']['activated_modules'] = [];
+$profile['module']['activate_modules'] = [];
 $profile['module']['default'] = '';
 $profile['module']['param'] = 'm';
 
@@ -790,9 +796,10 @@ $profile['module']['static']['web'] = true;
  * module.tinyphp-ui.enabled 开启
  *      true 开启前确认是否通过composer/框架加载，引入了tinyphporg/tinyphp-ui模块
  *
- * module.tinyphp-ui.public_path 在前端源码展示的公共路径
+ * module.tinyphp-ui.public_path 在前端源码展示的公共路径、
+ *      
  *      根目录下的绝对路径 /tinyphp-ui
- *      包含域名的绝对路径 demo.xxx.com/tinyphp-ui/
+ *      包含域名的绝对路径 比如cdn域名， demo.xxx.com/tinyphp-ui/
  *
  *  module.tinyphp-ui.inject
  *      是否自动将ui库的公共路径，注入到html源码
@@ -816,11 +823,11 @@ $profile['module']['static']['web'] = true;
  *      开启调试后的监听事件类
  */
 $profile['module']['tinyphp-ui']['enabled'] = true;
-$profile['module']['tinyphp-ui']['public_path'] = '/static/tinyphp-ui/';
+$profile['module']['tinyphp-ui']['public_path'] = '/static/tinyphp-ui/';  
 $profile['module']['tinyphp-ui']['inject'] = true;
 
-// UI前端模块的开发设置
-$profile['module']['tinyphp-ui']['dev']['enabled'] = true;
+// UI前端模块的开发设置 可选
+$profile['module']['tinyphp-ui']['dev']['enabled'] = false;
 $profile['module']['tinyphp-ui']['dev']['public_path'] = "http://127.0.0.1:8080/js/tinyphp-ui.js";
 $profile['module']['tinyphp-ui']['dev']['admin_public_path'] = "http://127.0.0.1:8080/js/tinyphp-ui.admin.js";
 

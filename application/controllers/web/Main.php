@@ -16,7 +16,6 @@
 namespace App\Controller;
 
 use Tiny\MVC\Controller\Controller;
-use Tiny\Runtime\Runtime;
 use Tiny\Config\Configuration;
 use Tiny\MVC\Request\Request;
 
