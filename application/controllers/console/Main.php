@@ -33,7 +33,7 @@ class Main extends \Tiny\MVC\Controller\ConsoleController
      * 
      * @var ConsoleApplication
      */
-    protected ConsoleApplication $app;
+    protected $app;
     
     /**
      * @autowired 实例化时自动执行
