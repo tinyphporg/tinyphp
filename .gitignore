@@ -8,7 +8,12 @@
 */.DS_Store
 */.DS_Store
 *.phar
-
+runtime/view/compile/*
+runtime/view/cache/*
+runtime/view/config/*
+runtime/cache/*
+runtime/log/*
+runtime/pid/*
 public/setting
 public/profile
 public/static/*
