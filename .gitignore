@@ -8,9 +8,11 @@
 /vendor/
 .DS_Store
 *.phar
-runtime/view/*
+runtime/view/compile/*
+runtime/view/cache/*
+runtime/view/config/*
 runtime/cache/*
-application/runtime/view/*
+runtime/log/*
 public/setting
 public/profile
 public/static/*
