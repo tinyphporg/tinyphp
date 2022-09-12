@@ -18,6 +18,9 @@ namespace App\Controller;
 use Tiny\MVC\Controller\Controller;
 use Tiny\Config\Configuration;
 use Tiny\MVC\Request\Request;
+use Tiny\DI\Container;
+use Tiny\DI\ContainerInterface;
+use Tiny\MVC\Module\ModuleManager;
 
 /**
 * An example of main controller
@@ -33,8 +36,14 @@ class Main extends Controller
      * @param Request $request 当前请求实例
      * @param Configuration $config 当前应用实例
      */
-    public function indexAction(Request $request, Configuration $config)
+    public function indexAction(ContainerInterface $container, Request $request, Configuration $config)
     {
+        if ($container->has(ModuleManager::class)) {
+            $moduleManager  = $container->get(ModuleManager::class);
+            if ($moduleManager->has('tinyphp-ui')) {
+                $this->response->redirect('/uidemo/docs/readme.html');
+            }
+        }
        $this->display('main/index.htm');
     }
 }

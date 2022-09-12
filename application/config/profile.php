@@ -821,16 +821,22 @@ $profile['module']['static']['web'] = true;
  *
  *  module.tinyphp-ui.dev_event_listener
  *      开启调试后的监听事件类
+ *      
+ *  module.tinyphp-ui.assigns array
+ *  预设的配置变量注入到视图模板内
+ *  example: ui 即寻找tinyphp-ui.config内的ui节点，与application.config的ui节点合并，并以$ui注入到视图变量 
  */
 $profile['module']['tinyphp-ui']['enabled'] = true;
 $profile['module']['tinyphp-ui']['public_path'] = '/static/tinyphp-ui/';  
 $profile['module']['tinyphp-ui']['inject'] = true;
 
 // UI前端模块的开发设置 可选
-$profile['module']['tinyphp-ui']['dev']['enabled'] = false;
+$profile['module']['tinyphp-ui']['dev']['enabled'] = true;
 $profile['module']['tinyphp-ui']['dev']['public_path'] = "http://127.0.0.1:8080/js/tinyphp-ui.js";
 $profile['module']['tinyphp-ui']['dev']['admin_public_path'] = "http://127.0.0.1:8080/js/tinyphp-ui.admin.js";
 
+// 将预设配置的变量注入到视图模板
+$profile['module']['tinyphp-ui']['assigns'] = ['ui'];
 /**
  * 需要做路径处理的路径节点列表
  *      [propertis.nodename...]
