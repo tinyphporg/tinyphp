@@ -31,5 +31,6 @@ return [
     'alias' => [
         'bootstrap' => Bootstrap::class
     ],
+
 ];
 ?>
