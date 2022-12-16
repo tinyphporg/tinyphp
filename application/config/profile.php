@@ -688,6 +688,10 @@ $profile['view']['assign'] = [];
 $profile['view']['engines'] = [];
 $profile['view']['helpers'] = [];
 
+// 部件配置
+
+$profile['view']['widgets'] = [];
+
 /*
  * 视图的全局静态资源配置
  * 
@@ -831,7 +835,7 @@ $profile['module']['tinyphp-ui']['public_path'] = '/static/tinyphp-ui/';
 $profile['module']['tinyphp-ui']['inject'] = true;
 
 // UI前端模块的开发设置 可选
-$profile['module']['tinyphp-ui']['dev']['enabled'] = false;
+$profile['module']['tinyphp-ui']['dev']['enabled'] = true;
 $profile['module']['tinyphp-ui']['dev']['public_path'] = "http://127.0.0.1:8080/js/tinyphp-ui.js";
 $profile['module']['tinyphp-ui']['dev']['admin_public_path'] = "http://127.0.0.1:8080/js/tinyphp-ui.admin.js";
 

@@ -41,7 +41,7 @@ class Main extends Controller
         if ($container->has(ModuleManager::class)) {
             $moduleManager  = $container->get(ModuleManager::class);
             if ($moduleManager->has('tinyphp-ui')) {
-                $this->response->redirect('/uidemo/docs/readme.html');
+              $this->response->redirect('/uidemo/docs/readme.html');
             }
         }
        $this->display('main/index.htm');
