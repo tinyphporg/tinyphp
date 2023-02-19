@@ -21,6 +21,7 @@ use Tiny\MVC\Request\Request;
 use Tiny\DI\Container;
 use Tiny\DI\ContainerInterface;
 use Tiny\MVC\Module\ModuleManager;
+use Tiny\MVC\View\View;
 
 /**
 * An example of main controller
@@ -36,7 +37,7 @@ class Main extends Controller
      * @param Request $request 当前请求实例
      * @param Configuration $config 当前应用实例
      */
-    public function indexAction(ContainerInterface $container, Request $request, Configuration $config)
+    public function indexAction(ContainerInterface $container, Request $request, Configuration $config, View $view)
     {
         if ($container->has(ModuleManager::class)) {
             $moduleManager  = $container->get(ModuleManager::class);

@@ -1,0 +1,22 @@
+{
+  "name": "sheetjs",
+  "version": "2.0.0",
+  "author": "sheetjs",
+  "description": "Placeholder package for SheetJS",
+  "keywords": [
+    "sheetjs"
+  ],
+  "main": "./index",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/SheetJS/sheetjs.git"
+  },
+  "homepage": "http://sheetjs.com/",
+  "bugs": {
+    "url": "https://github.com/SheetJS/sheetjs/issues"
+  },
+  "license": "Apache-2.0",
+  "engines": {
+    "node": ">=0.8"
+  }
+}

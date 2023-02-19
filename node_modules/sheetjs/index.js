@@ -1,0 +1,1 @@
+throw new Error("This is a placeholder package for @SheetJS.  See https://sheetjs.com for more info.  For the original @jshanson7 library, install an older version (1.x.x) or use the repo https://github.com/jshanson7/sheetjs");
