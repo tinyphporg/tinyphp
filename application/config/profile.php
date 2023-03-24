@@ -132,8 +132,8 @@ $profile['src']['path'] = '{app}';                    // application源码路径
 $profile['src']['public'] = '{app}../public/';        // 入口文件夹
 $profile['src']['static'] = '{public}static/';        // 静态资源文件夹
 $profile['src']['resources'] = '{app}../resource/';   // 资源文件夹
-$profile['src']['runtime'] = '{app}../runtime/';      // 运行时文件夹
-$profile['src']['tmp'] = '{runtime}tmp/';             // 临时文件夹
+$profile['src']['var'] = '{app}../var/';      // 运行时文件夹
+$profile['src']['tmp'] = '{var}tmp/';             // 临时文件夹
 $profile['src']['global'] = 'librarys/global/';           // 存放全局类的文件夹
 $profile['src']['library'] = 'librarys/';          // 除了composer外，引入的其他项目的库文件夹
 $profile['src']['controller'] = 'controllers/web/';   // web环境下的控制器类文件夹
@@ -242,7 +242,7 @@ $profile['builder']['profile_path'] = 'build/profile';
 $profile['daemon']['enabled'] = true;
 $profile['daemon']['id'] = 'tinyphp-daemon';
 $profile['daemon']['event_listener'] = \Tiny\MVC\Event\DaemonEventListener::class;
-$profile['daemon']['piddir'] = '{runtime}/pid/';
+$profile['daemon']['piddir'] = '{var}/pid/';
 $profile['daemon']['tick'] = 2;
 $profile['daemon']['daemons'] = [
     'tinyphp-daemon' => [
@@ -306,7 +306,7 @@ $profile['lang']['cache']['enabled'] = true; // 配置模块缓存设置 提高�
  */
 $profile['log']['enabled'] = true;
 $profile['log']['writer'] = 'file';    /*默认可以设置file|syslog 设置类型为file时，需要设置log.path为可写目录路径 */
-$profile['log']['path'] = '{runtime}/log/';
+$profile['log']['path'] = '{var}/log/';
 
 /**
  * 数据资源池配置
@@ -419,7 +419,7 @@ $profile['data']['sources'] = [
  */
 $profile['cache']['enabled'] = true;
 $profile['cache']['ttl'] = 3600;
-$profile['cache']['dir'] = '{runtime}/cache/';
+$profile['cache']['dir'] = '{var}/cache/';
 $profile['cache']['default_id'] = 'default';
 $profile['cache']['storagers'] = [];
 $profile['cache']['sources'] = [
@@ -680,8 +680,8 @@ $profile['view']['basedir'] = 'views/';
 $profile['view']['theme'] = 'default';
 $profile['view']['lang'] = true;     //自动加载语言包
 $profile['view']['paths'] = [];
-$profile['view']['compile'] = '{runtime}/view/compile/';
-$profile['view']['config']  = '{runtime}/view/config/';
+$profile['view']['compile'] = '{var}/view/compile/';
+$profile['view']['config']  = '{var}/view/config/';
 $profile['view']['assign'] = [];
 
 // 引擎和助手配置
@@ -835,7 +835,7 @@ $profile['module']['tinyphp-ui']['public_path'] = '/static/tinyphp-ui/';
 $profile['module']['tinyphp-ui']['inject'] = true;
 
 // UI前端模块的开发设置 可选
-$profile['module']['tinyphp-ui']['dev']['enabled'] = true;
+$profile['module']['tinyphp-ui']['dev']['enabled'] = false;
 $profile['module']['tinyphp-ui']['dev']['dev_public_path'] = "http://127.0.0.1:8080/";
 
 // 将预设配置的变量注入到视图模板
@@ -849,7 +849,7 @@ $profile['path'] = [
     'src.path',
     'src.public',
     'src.static',
-    'src.runtime',
+    'src.var',
     'src.resources',
     'src.tmp',
     'src.vendor',
