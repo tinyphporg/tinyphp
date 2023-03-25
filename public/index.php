@@ -19,7 +19,7 @@ require_once TINY_COMPOSER_FILE;
 
 /* 
  * APPLICATION_PATH 该常量必须设置
-*  Application run 自动识别web/console/rpc模式
+*  Application run 自动识别 web/console/rpc模式
 */
 define('APPLICATION_PATH', dirname(__DIR__) . '/application/');
 \Tiny\Tiny::createApplication(APPLICATION_PATH, APPLICATION_PATH . 'config/profile.php')->run();
