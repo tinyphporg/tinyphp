@@ -14,8 +14,7 @@
 define('TINY_ROOT_PATH', dirname(__DIR__) . DIRECTORY_SEPARATOR);
 
 // composer autoload
-define('TINY_COMPOSER_FILE', TINY_ROOT_PATH . 'vendor/autoload.php');
-require_once TINY_COMPOSER_FILE;
+require_once TINY_ROOT_PATH . 'vendor/autoload.php';
 
 /* 
  * APPLICATION_PATH 该常量必须设置
