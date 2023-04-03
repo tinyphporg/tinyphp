@@ -21,4 +21,4 @@ require_once TINY_ROOT_PATH . 'vendor/autoload.php';
 *  Application run 自动识别 web/console/rpc模式
 */
 define('APPLICATION_PATH', dirname(__DIR__) . '/application/');
-\Tiny\Tiny::createApplication(APPLICATION_PATH, APPLICATION_PATH . 'config/profile.php')->run();
+\Tiny\Tiny::createApplication(APPLICATION_PATH)->run();
