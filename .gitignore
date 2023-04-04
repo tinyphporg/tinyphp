@@ -14,7 +14,9 @@ var/view/config/*
 var/cache/*
 var/log/*
 var/pid/*
+resource/*
 public/setting
 public/profile
 public/static/*
 composer.lock
+.env.local.php
