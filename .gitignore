@@ -18,3 +18,4 @@ public/setting
 public/profile
 public/static/*
 composer.lock
+.env.local.php
