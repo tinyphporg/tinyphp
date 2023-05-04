@@ -47,5 +47,10 @@ class Main extends Controller
         }
        $this->display('main/index.htm');
     }
+    
+    public function testAction(View $view)
+    {
+        //$view->messagebox->show(['content' => 'aaa']);
+    }
 }
 ?>

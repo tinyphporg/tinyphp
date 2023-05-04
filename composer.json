@@ -15,6 +15,7 @@
         "email": "da.jin@tinyphp.org"
     },
     "scripts": {
+        "post-update-cmd": "php public/index.php --debug /debug/clear"
     },
     "autoload": {
     },
