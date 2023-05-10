@@ -2,6 +2,8 @@
 $profile = [];
 $profile['debug']['enabled'] = true;
 
+echo "dev";
+
 /**
  * Application引导类
  *

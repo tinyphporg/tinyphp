@@ -1,6 +1,6 @@
 <?php 
 $profile = [];
-$profile['debug']['enabled'] = true;
+$profile['debug']['enabled'] = false;
 /**
  * Application引导类
  *

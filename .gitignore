@@ -8,9 +8,10 @@
 */.DS_Store
 */.DS_Store
 *.phar
-var/view/compile/*
-var/view/cache/*
-var/view/config/*
+.env.local.php
+application/views/compile/*
+application/vieww/cache/*
+application/views/config/*
 var/cache/*
 var/log/*
 var/pid/*
@@ -19,4 +20,3 @@ public/setting
 public/profile
 public/static/*
 composer.lock
-.env.local.php
