@@ -22,6 +22,7 @@ use Tiny\DI\Container;
 use Tiny\DI\ContainerInterface;
 use Tiny\MVC\Module\ModuleManager;
 use Tiny\MVC\View\View;
+use Tiny\Cache\Cache;
 
 /**
 * An example of main controller
@@ -48,8 +49,11 @@ class Main extends Controller
        $this->display('main/index.htm');
     }
     
-    public function testAction(View $view)
+    public function testAction(View $view, Cache $cache)
     {
+        $cache->set('a', 'sdfdsfgsdfsdfsd');
+        echo $cache->get('a');
+        echo 'vbvv';
         //$view->messagebox->show(['content' => 'aaa']);
     }
 }
