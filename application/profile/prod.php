@@ -1,6 +1,22 @@
 <?php
+/**
+ *
+ * @copyright (C), 2013-, King.
+ * @name profile.dev.php
+ * @author King
+ * @version stable 1.0
+ * @Date 2023年5月20日下午4:59:20
+ * @Description 生产环境下的应用配置文件
+ * @Class List 1.
+ * @Function List 1.
+ * @History King 2023年5月20日下午4:59:20 第一次建立该文件
+ *          King 2023年5月20日下午4:59:20 修改
+ *
+ */
 $profile = [];
-$profile['debug']['enabled'] = true;
+
+// 是否开启debug模式输出
+$profile['debug']['enabled'] = false;
 
 /**
  * Application引导类
@@ -66,8 +82,9 @@ $profile['data']['sources'] = [
     ['id' => 'memcached', 'driver' => 'memcached', 'servers' => [['host' => '127.0.0.1', 'port' => '11211']], 'persistent_id' => null, 'options' => []]
 ];
 
+
 /**
- * 守护进程的基本设置
+ * 服务端守护进程的基本设置
  *
  * 仅在命令行环境的ConsoleApplication实例生效
  *
@@ -179,9 +196,102 @@ $profile['cache']['sources'] = [
 ];
 
 
-// session
+/**
+ * HTTP SESSION设置
+ *
+ * 仅在WEB环境下有效
+ *
+ * session.enabled
+ *      开启框架自动代理SESSION处理
+ *
+ * session.domain
+ *      session cookie生效的域名设置
+ *
+ * session.path
+ *      session cookie生效的路径设置
+ *
+ *  session.expires
+ *      SESSION过期时间
+ *
+ *  session.adapters 添加自定义的SESSION适配器
+ *      adapterid 适配器ID
+ *      adapterClass 实现了session适配器接口的自定义session adapter class
+ *
+ *  session.adapter SESSION适配器
+ *      redis 以datasource的redis实例作为session适配器
+ *      memcache 以datasource的rmemcached实例作为session适配器
+ *
+ *  session.dataid
+ *      根据session.adapter选择对应的data资源实例
+ * */
 $profile['session']['enabled'] = true;
 $profile['session']['adapter'] = 'redis';
 $profile['session']['dataid'] = 'redis_session';
+
+
+/**
+ * 模块的静态公共资源配置
+ *
+ * module.static.enabled 是否开启静态资源的自动复制
+ *      true 开启
+ *
+ *  module.static.web WEB环境下是否自动开启静态资源复制
+ *      true 开启  会影响web下的某些性能
+ *
+ *  module.static.basedir 静态公共资源复制的目录
+ *
+ */
+$profile['module']['static']['enabled'] = true;
+$profile['module']['static']['web'] = true;
+$profile['module']['static']['basedir'] = '{path.static}';
+
+
+/**
+ * tinyphp-ui 前端库设置
+ *
+ * module.tinyphp-ui.enabled 开启
+ *      true 开启前确认是否通过composer/框架加载，引入了tinyphporg/tinyphp-ui模块
+ *
+ * module.tinyphp-ui.public_path 在前端源码展示的公共路径、
+ *
+ *      根目录下的绝对路径 /tinyphp-ui
+ *      包含域名的绝对路径 比如cdn域名， demo.xxx.com/tinyphp-ui/
+ *
+ *  module.tinyphp-ui.inject
+ *      是否自动将ui库的公共路径，注入到html源码
+ *      仅支持engine = template时
+ *
+ *  module.tinyphp-ui.helper
+ *      ui前端库在view注册的助手类
+ *      message 提示消息体
+ *      pagination 分页
+ *
+ * module.tinyphp-ui.template_dirname
+ *      UI库的视图模板路径
+ *
+ *  module.tinyphp-ui.dev_enabled 是否开启UI调试
+ *      必须在tinyphp-ui 运行npm run dev后开启调试模式
+ *
+ *  module.tinyphp-ui.dev_public_path
+ *      调试库在前端展现的URL  相对于view.public_path的路径
+ *
+ *  module.tinyphp-ui.dev_event_listener
+ *      开启调试后的监听事件类
+ *
+ *  module.tinyphp-ui.assigns array
+ *  预设的配置变量注入到视图模板内
+ *  example: ui 即寻找tinyphp-ui.config内的ui节点，与application.config的ui节点合并，并以$ui注入到视图变量
+ */
+$profile['module']['tinyphp-ui']['enabled'] = true;
+$profile['module']['tinyphp-ui']['public_path'] = '/static/tinyphp-ui/';
+$profile['module']['tinyphp-ui']['inject'] = true;
+
+// UI前端模块的开发设置 可选
+$profile['module']['tinyphp-ui']['dev']['enabled'] = false;
+$profile['module']['tinyphp-ui']['dev']['dev_public_path'] = "http://127.0.0.1:8080/";
+
+// 将预设配置的变量注入到视图模板
+$profile['module']['tinyphp-ui']['assigns'] = ['ui'];
+
 return $profile;
 ?>
